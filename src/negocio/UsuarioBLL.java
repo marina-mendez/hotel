@@ -1,13 +1,14 @@
 package negocio;
 
 import javax.swing.JOptionPane;
+import datos.UsuarioDLL;
 
-public class Usuario {
+public class UsuarioBLL {
 	
 	private String usuario;
 	private String contrasenia;
 	
-	public Usuario(String usuario, String contrasenia) {
+	public UsuarioBLL(String usuario, String contrasenia) {
 		super();
 		this.usuario = usuario;
 		this.contrasenia = contrasenia;
@@ -38,6 +39,7 @@ public class Usuario {
 		contrasenia = (String)JOptionPane.showInputDialog(null, "Ingrese su contraseña:"
 				+ " (No se permiten caracteres especiales)"
 				,"Hotel House Hunter: Administración",JOptionPane.DEFAULT_OPTION);
+		
 		
 		
 	}

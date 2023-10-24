@@ -1,6 +1,6 @@
 package negocio;
 
-public class ReservaJuego implements Reserva{
+public class ReservaJuego implements ReservaBLL{
 
 	@Override
 	public void hacerReserva() {

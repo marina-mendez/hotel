@@ -2,16 +2,16 @@ package negocio;
 
 import java.time.LocalDate;
 
-public class ReservaHabitacion implements Reserva{
+public class ReservaHabitacion implements ReservaBLL{
 
 	private String numero;
 	private LocalDate fechaInicio;
 	private LocalDate fechaFin;
-	private Habitacion h;
+	private HabitacionBLL h;
 	private Cliente c;
 	private int numeroOcupantes;
 	
-	public ReservaHabitacion(String numero, LocalDate fechaInicio, LocalDate fechaFin, Habitacion h, Cliente c,
+	public ReservaHabitacion(String numero, LocalDate fechaInicio, LocalDate fechaFin, HabitacionBLL h, Cliente c,
 			int numeroOcupantes) {
 		super();
 		this.numero = numero;
@@ -46,11 +46,11 @@ public class ReservaHabitacion implements Reserva{
 		this.fechaFin = fechaFin;
 	}
 
-	public Habitacion getH() {
+	public HabitacionBLL getH() {
 		return h;
 	}
 
-	public void setH(Habitacion h) {
+	public void setH(HabitacionBLL h) {
 		this.h = h;
 	}
 

@@ -1,6 +1,6 @@
 package negocio;
 
-public class Recepcionista extends Usuario{
+public class Recepcionista extends UsuarioBLL{
 
 	public Recepcionista(String usuario, String contrasenia) {
 		super(usuario, contrasenia);

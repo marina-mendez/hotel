@@ -1,6 +1,6 @@
 package negocio;
 
-public interface Reserva {
+public interface ReservaBLL {
 
 	public void hacerReserva();
 }
