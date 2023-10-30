@@ -6,42 +6,75 @@ import java.sql.ResultSet;
 import java.util.LinkedList;
 
 public class UsuarioDLL {
-	private String id;
-	private String nombre;
-	private String pass;
-	private int rol; 
 	
-	public UsuarioDLL(String id, String nombre, String pass, int rol) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
-		this.pass = pass;
-		this.rol = rol;
+	static Conexion CON = new Conexion();
+	
+	static Connection CONEXION = CON.conectar();
+	
+	static PreparedStatement STMT;
+	
+	
+	public UsuarioDLL(String string, String string2, String string3, int parseInt) {
+		// TODO Auto-generated constructor stub
 	}
 
-	public UsuarioDLL() {
+	public static boolean guardarUsuario(String nombre, String pass, int rol) {
+
+		String sql = "INSERT INTO `usuarios`(`nombre`, `pass`, `rol`) VALUES (?,?,?)";
+		try {
+			
+			STMT = CONEXION.prepareStatement(sql);
+			
+			
+			STMT.setString(1, nombre);
+			STMT.setString(2, pass);
+			STMT.setLong(3, rol);
+			
+			STMT.executeUpdate();
+			CONEXION.close();
+			return true;
+			
+		} catch (Exception e) {
+			System.out.println("Error al guardar" + e);
+			
+			return false;
+		}
+		
 		
 	}
 	
-	Conexion con = new Conexion();
-	
-	Connection conexion = con.conectar();
-	
-	PreparedStatement stmt;
-	
-	
-	public boolean guardarUsuario() {
+	public boolean editar(String nombre, String pass, int rol) {
 
-		String sql = "INSERT INTO `usuarios`(null, `nombre`, `pass`, `rol`) VALUES (?,?,?,?)";
+		String sql = "UPDATE `usuarios` SET `nombre`=?,`pass`=?,`rol`=? WHERE nombre= ?";
 		try {
 			
-			stmt = conexion.prepareStatement(sql);
+			STMT = CONEXION.prepareStatement(sql);
 			
-			stmt.setString(1, this.getNombre());
-			stmt.setLong(4, this.getRol());
+			STMT.setString(1, nombre);
+			STMT.setString(1, pass);
+			STMT.setLong(3, rol);
 			
-			stmt.executeUpdate();
-			conexion.close();
+			STMT.executeUpdate();
+			CONEXION.close();
+			return true;
+			
+		} catch (Exception e) {
+			System.out.println("Error al guardar");
+			return false;
+		}
+		
+		
+	}
+	public boolean Eliminar(String nombre) {
+
+		String sql = "DELETE FROM `usuarios` WHERE nombre=?";
+		try {
+			
+			STMT = CONEXION.prepareStatement(sql);
+			
+			STMT.setString(1, nombre);
+			STMT.executeUpdate();
+			CONEXION.close();
 			return true;
 			
 		} catch (Exception e) {
@@ -52,71 +85,29 @@ public class UsuarioDLL {
 		
 	}
 	
-	public boolean editar() {
-
-		String sql = "UPDATE `usuario` SET `nombre`=?,`pass`=?,`rol`=? WHERE nombre= ?";
-		try {
-			
-			stmt = conexion.prepareStatement(sql);
-			
-			stmt.setString(1, this.getNombre());
-			stmt.setString(1, this.getPass());
-			stmt.setLong(3, this.getRol());
-			
-			stmt.executeUpdate();
-			conexion.close();
-			return true;
-			
-		} catch (Exception e) {
-			System.out.println("Error al guardar");
-			return false;
-		}
-		
-		
-	}
-	public boolean Eliminar() {
-
-		String sql = "DELETE FROM `persona` WHERE nombre=?";
-		try {
-			
-			stmt = conexion.prepareStatement(sql);
-			
-			stmt.setString(1, this.getNombre());
-			stmt.executeUpdate();
-			conexion.close();
-			return true;
-			
-		} catch (Exception e) {
-			System.out.println("Error al guardar");
-			return false;
-		}
-		
-		
-	}
 	
-	
-	public LinkedList<UsuarioDLL> MostrarTodos() {
-		LinkedList<UsuarioDLL> personas = new LinkedList<UsuarioDLL>();
-		String sql = "SELECT * FROM `persona` WHERE 1";
+	public static LinkedList<UsuarioDLL> MostrarTodos() {
+		LinkedList<UsuarioDLL> listaDeUsuarios = new LinkedList<UsuarioDLL>();
+		String sql = "SELECT * FROM `usuarios` WHERE 1";
 		
 		String[] datos = new String[4];
 		try {
 			
-			stmt = conexion.prepareStatement(sql);
+			STMT = CONEXION.prepareStatement(sql);
 			
-			ResultSet resultados =	stmt.executeQuery();
+			ResultSet resultados =	STMT.executeQuery();
 			while(resultados.next()) {
 				
 				datos[0] = resultados.getString(1);
 				datos[1] = resultados.getString(2);
 				datos[2] = resultados.getString(3);
 				datos[3] = resultados.getString(4);
-				personas.add(new UsuarioDLL(datos[0],datos[1],datos[2],Integer.parseInt(datos[3])));
+				listaDeUsuarios.add(new UsuarioDLL(datos[0],datos[1],datos[2],Integer.parseInt(datos[3])));
 			}
-			if(personas.isEmpty()) { 
+			if(listaDeUsuarios.isEmpty()) { 
 				return null; }
 			else {
-				return personas;
+				return listaDeUsuarios;
 			}
 		} catch (Exception e) {
 			System.out.println("Error al mostrar");
@@ -126,83 +117,41 @@ public class UsuarioDLL {
 		
 	}
 	
-	public LinkedList<UsuarioDLL> MostrarUsuario(String nombre, String dni) {
-		LinkedList<UsuarioDLL> personas = new LinkedList<UsuarioDLL>();
-		String sql = "SELECT * FROM `persona` WHERE nombre=? and dni=?";
+	public static LinkedList<UsuarioDLL> MostrarUsuario(String nombre, String pass) {
+		LinkedList<UsuarioDLL> listaDeUsuarios = new LinkedList<UsuarioDLL>();
+		String sql = "SELECT * FROM `usuarios` WHERE nombre=? and pass=?";
 		
 		String[] datos = new String[4];
 		try {
 			
-			stmt = conexion.prepareStatement(sql);
-			stmt.setString(1, nombre);
-			stmt.setString(2, dni);
+			STMT = CONEXION.prepareStatement(sql);
+			STMT.setString(1, nombre);
+			STMT.setString(2, pass);
 			
-			ResultSet resultados =	stmt.executeQuery();
+			ResultSet resultados =	STMT.executeQuery();
 			while(resultados.next()) {
 				
 				datos[0] = resultados.getString(1);
 				datos[1] = resultados.getString(2);
 				datos[2] = resultados.getString(3);
 				datos[3] = resultados.getString(4);
-				personas.add(new UsuarioDLL(datos[0],datos[1],datos[2],Integer.parseInt(datos[3])));
+				listaDeUsuarios.add(new UsuarioDLL(datos[0],datos[1],datos[2],Integer.parseInt(datos[3])));
 			}
 			
-			if(personas.isEmpty()) {
-				
+			if(listaDeUsuarios.isEmpty()) {
 				return null;
 			}else {
 				
-				return personas;
+				return listaDeUsuarios;
 			}
 			
 		} catch (Exception e) {
-			System.out.println("Error al mostrar");
+			System.out.println("Error al mostrar el usuario: " + e);
 			return null;
 		}
 		
 		
 	}
 
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getPass() {
-		return pass;
-	}
-
-	public void setPass(String pass) {
-		this.pass = pass;
-	}
-
-	public int getRol() {
-		return rol;
-	}
-
-	public void setRol(int rol) {
-		this.rol = rol;
-	}
-
-	@Override
-	public String toString() {
-		return "Usuario [nombre=" + nombre + ", rol=" + rol + "]";
-	}
-
-	
-	
-	
 	
 }

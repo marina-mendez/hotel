@@ -2,9 +2,6 @@ package interfaz;
 
 import javax.swing.JOptionPane;
 
-import negocio.PersonalLimpieza;
-
-
 public class Limpieza {
 
 	public void verPantalla() {
@@ -12,10 +9,7 @@ public class Limpieza {
 		String [] opciones = {
 				"Ver habitaciones", "Limpiar habitaciones", "Salir"
 		};
-		int opcion;
-
-		PersonalLimpieza.inicioSesion();
-		
+		int opcion;		
 		do {
 			
 			opcion = JOptionPane.showOptionDialog(null,"Área de limpieza", "Hotel House Hunter", 0, 1, null, opciones, opciones[0]);

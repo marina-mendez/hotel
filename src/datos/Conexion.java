@@ -17,6 +17,8 @@ public class Conexion {
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/hotel","root","");
 			//JOptionPane.showMessageDialog(null, "se conecto");
 		} catch (Exception e) {
+			
+			System.out.println(e);
 	
 			JOptionPane.showMessageDialog(null, "error al conectarse");
 		}

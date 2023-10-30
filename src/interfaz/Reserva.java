@@ -2,7 +2,8 @@ package interfaz;
 
 import javax.swing.JOptionPane;
 
-import negocio.Recepcionista;
+import datos.HabitacionDLL;
+import negocio.ReservaHabitacion;
 
 public class Reserva {
 
@@ -13,7 +14,7 @@ public class Reserva {
 		};
 		String opcion;
 
-		Recepcionista.inicioSesion();
+		//Recepcionista.inicioSesion();
 		
 		do {
 			
@@ -22,10 +23,10 @@ public class Reserva {
 			
 			switch(opcion) {
 			case "Ver habitaciones":
-
+				JOptionPane.showMessageDialog(null, HabitacionDLL.mostrarHabitaciones());  
 				break;
 			case "Reservar habitación":
-
+				ReservaHabitacion r = new ReservaHabitacion();
 				break;
 			case "Eliminar reserva de habitación":
 
@@ -42,4 +43,7 @@ public class Reserva {
 			}
 		} while(!opcion.equalsIgnoreCase("Salir"));
 	}
+	
+	
+	
 }
