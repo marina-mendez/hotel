@@ -103,7 +103,6 @@ public class HabitacionDLL {
 			STMT.setLong(3, piso);
 			
 			STMT.executeUpdate();
-			CONEXION.close();
 			return true;
 			
 		} catch (Exception e) {
@@ -126,7 +125,6 @@ public class HabitacionDLL {
 			STMT.setLong(3, rol);
 			
 			STMT.executeUpdate();
-			CONEXION.close();
 			return true;
 			
 		} catch (Exception e) {
@@ -145,7 +143,6 @@ public class HabitacionDLL {
 			
 			STMT.setLong(1, idhabitacion);
 			STMT.executeUpdate();
-			CONEXION.close();
 			return true;
 			
 		} catch (Exception e) {
@@ -243,7 +240,6 @@ public class HabitacionDLL {
 			STMT.setLong(2, idHabitacion);
 			
 			STMT.executeUpdate();
-			CONEXION.close();
 			return true;
 			
 		} catch (Exception e) {

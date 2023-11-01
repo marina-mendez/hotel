@@ -74,4 +74,20 @@ public class ReservaDLL {
 		
 	}
 
+	public static boolean eliminar(int idreserva) {
+		String sql = "DELETE FROM `reservas` WHERE idreserva=?";
+		try {
+			
+			STMT = CONEXION.prepareStatement(sql);
+			
+			STMT.setLong(1, idreserva);
+			STMT.executeUpdate();
+			return true;
+			
+		} catch (Exception e) {
+			System.out.println("Error al guardar");
+			return false;
+		}
+	}
+
 }

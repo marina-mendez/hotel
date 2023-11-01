@@ -236,11 +236,15 @@ public class ReservaHabitacion implements ReservaBLL{
 			numero = JOptionPane.showInputDialog("Ingrese su " + campo);
 			
 			if(!numero.isEmpty()) {
-				String patron = "^[0-9]+$";
-				if(numero.matches(patron)) {
-					caracterCorrecto=true;
+				if(!(numero.length()>10)) {
+					String patron = "^[0-9]+$";
+					if(numero.matches(patron)) {
+						caracterCorrecto=true;
+					}else {
+						JOptionPane.showMessageDialog(null, "Recuerde que el campo sólo puede contener números.");
+					}
 				}else {
-					JOptionPane.showMessageDialog(null, "Recuerde que el campo sólo puede contener números.");
+					JOptionPane.showMessageDialog(null, "El numero de seguro debe ser menor a 10 dígitos.");
 				}
 			}
 		}while(caracterCorrecto==false);
@@ -250,7 +254,29 @@ public class ReservaHabitacion implements ReservaBLL{
 	}
 
 	public void eliminarReserva() {
+		LinkedList<ReservaHabitacion> listaReservas= ReservaDLL.mostrarReservas();
+		String [] reservas = new String[listaReservas.size()];
+		for (ReservaHabitacion h : listaReservas) {
+			reservas[listaReservas.indexOf(h)]= "ID RESERVA: " + h.getIdReserva() + ". ID CLIENTE: " + h.getIdCliente()+ ". ID HABITACION: " + h.getIdHabitacion();
+		}
 		
+		int idreserva = 0;
+		
+		String reservaSeleccionada = (String)JOptionPane.showInputDialog(null,
+				"Elegir la reserva que se quiera eliminar:","Hotel House Hunter: eliminación de reservas",
+				JOptionPane.DEFAULT_OPTION,null,reservas,reservas[0]);
+		
+		for (ReservaHabitacion h : listaReservas) {
+			if (reservaSeleccionada.equals("ID RESERVA: " + h.getIdReserva() + ". ID CLIENTE: " + h.getIdCliente()+ ". ID HABITACION: " + h.getIdHabitacion())) {
+				idreserva= Integer.valueOf(h.getIdReserva());
+				}
+		}
+		
+		if(ReservaDLL.eliminar(idreserva)){
+			JOptionPane.showMessageDialog(null, "Reserva de ID: " + idreserva +  " eliminada.");
+		}else {
+			JOptionPane.showMessageDialog(null, "No se pudo eliminar la reservar.");
+			}
 	}
 
 	public void verReservas() {
