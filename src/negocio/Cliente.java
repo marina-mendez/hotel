@@ -2,16 +2,16 @@ package negocio;
 
 public class Cliente {
 	
-	private int dni;
+	private int id;
 	private String nombre;
 	private String apellido;
 	private int edad;
 	private int numeroSeguro;
 	private String lugarOrigen;
 	
-	public Cliente(int dni, String nombre, String apellido, int edad, int numeroSeguro, String lugarOrigen) {
+	public Cliente(int id, String nombre, String apellido, int edad, int numeroSeguro, String lugarOrigen) {
 		super();
-		this.dni = dni;
+		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.edad = edad;
@@ -19,12 +19,12 @@ public class Cliente {
 		this.lugarOrigen = lugarOrigen;
 	}
 
-	public int getDni() {
-		return dni;
+	public int getId() {
+		return id;
 	}
 
-	public void setDni(int dni) {
-		this.dni = dni;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getNombre() {

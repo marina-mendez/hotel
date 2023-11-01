@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
 
 import datos.HabitacionDLL;
 import datos.UsuarioDLL;
-import negocio.Administrador;
+import negocio.HabitacionBLL;
 
 public class Administracion {
 
@@ -32,16 +32,17 @@ public class Administracion {
 				agregarHabitacion();
 				break;
 			case "Eliminar habitaciones":
-
+				HabitacionBLL.eliminarHabitacion();  
 				break;
 			case "Ver juegos":
-
+				JOptionPane.showMessageDialog(null,"Disponible próximamente.");  
 				break;
 			case "Agregar juegos":
-
+				JOptionPane.showMessageDialog(null,"Disponible próximamente.");  
 				break;
 			default:
 			//Eliminar juegos
+				JOptionPane.showMessageDialog(null,"Disponible próximamente.");  
 				break;
 			}
 		} while(!opcion.equalsIgnoreCase("Salir"));

@@ -3,23 +3,22 @@ package negocio;
 import java.time.LocalDate;
 import java.util.LinkedList;
 
+import javax.swing.JOptionPane;
+
+import datos.HabitacionDLL;
+
 public class HabitacionBLL {
 	
 	private int ocupantes;
 	private boolean ocupacionTotal;
 	private LocalDate checkin;
 	private LocalDate checkout;
-	private LinkedList<ReservaBLL> reserva;
 	int ubicacion;
 	
-	public HabitacionBLL(int ocupantes, boolean ocupacionTotal, LocalDate checkin, LocalDate checkout,
-			LinkedList<ReservaBLL> reserva, int ubicacion) {
+	public HabitacionBLL(int ocupantes, boolean ocupacionTotal, int ubicacion) {
 		super();
 		this.ocupantes = ocupantes;
 		this.ocupacionTotal = ocupacionTotal;
-		this.checkin = checkin;
-		this.checkout = checkout;
-		this.reserva = reserva;
 		this.ubicacion = ubicacion;
 	}
 	
@@ -47,12 +46,6 @@ public class HabitacionBLL {
 	public void setCheckout(LocalDate checkout) {
 		this.checkout = checkout;
 	}
-	public LinkedList<ReservaBLL> getReserva() {
-		return reserva;
-	}
-	public void setReserva(LinkedList<ReservaBLL> reserva) {
-		this.reserva = reserva;
-	}
 	public int getUbicacion() {
 		return ubicacion;
 	}
@@ -60,5 +53,32 @@ public class HabitacionBLL {
 		this.ubicacion = ubicacion;
 	}
 	
+
+	public static void eliminarHabitacion() {
+	
+	LinkedList<HabitacionDLL> listaHabitaciones= HabitacionDLL.mostrarHabitaciones();
+	String [] habitaciones = new String[listaHabitaciones.size()];
+	for (HabitacionDLL h : listaHabitaciones) {
+		habitaciones[listaHabitaciones.indexOf(h)]= "ID: " + h.getId() + ". Lugares disponibles: " + h.getRestantes()+ ". Piso: " + h.getPiso();
+	}
+	
+	int idhabitacion = 0;
+	
+	String hSeleccionada = (String)JOptionPane.showInputDialog(null,
+			"Elegir la habitación que se quiera eliminar:","Hotel House Hunter: eliminación de habitación",
+			JOptionPane.DEFAULT_OPTION,null,habitaciones,habitaciones[0]);
+	
+	for (HabitacionDLL h : listaHabitaciones) {
+		if (hSeleccionada.equals("ID: " + h.getId() + ". Lugares disponibles: " + h.getRestantes()+ ". Piso: " + h.getPiso())) {
+			idhabitacion= Integer.valueOf(h.getId());
+			}
+	}
+	
+	if(HabitacionDLL.eliminar(idhabitacion)){
+		JOptionPane.showMessageDialog(null, "Habitación de ID: " + idhabitacion +  " eliminada.");
+	}else {
+		JOptionPane.showMessageDialog(null, "No se pudo eliminar la habitación.");
+		}
+	}
 	
 }

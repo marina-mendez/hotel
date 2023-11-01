@@ -8,4 +8,10 @@ public class ReservaJuego implements ReservaBLL{
 		
 	}
 
+	@Override
+	public void pedirDatosCliente() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

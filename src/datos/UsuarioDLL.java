@@ -31,11 +31,10 @@ public class UsuarioDLL {
 			STMT.setLong(3, rol);
 			
 			STMT.executeUpdate();
-			CONEXION.close();
 			return true;
 			
 		} catch (Exception e) {
-			System.out.println("Error al guardar" + e);
+			System.out.println("Error al guardar: " + e);
 			
 			return false;
 		}
@@ -55,7 +54,6 @@ public class UsuarioDLL {
 			STMT.setLong(3, rol);
 			
 			STMT.executeUpdate();
-			CONEXION.close();
 			return true;
 			
 		} catch (Exception e) {
@@ -74,7 +72,6 @@ public class UsuarioDLL {
 			
 			STMT.setString(1, nombre);
 			STMT.executeUpdate();
-			CONEXION.close();
 			return true;
 			
 		} catch (Exception e) {
@@ -137,6 +134,7 @@ public class UsuarioDLL {
 				datos[3] = resultados.getString(4);
 				listaDeUsuarios.add(new UsuarioDLL(datos[0],datos[1],datos[2],Integer.parseInt(datos[3])));
 			}
+			
 			
 			if(listaDeUsuarios.isEmpty()) {
 				return null;

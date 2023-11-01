@@ -2,6 +2,9 @@ package datos;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import negocio.Cliente;
 
 public class ClienteDLL {
 
@@ -28,7 +31,6 @@ public class ClienteDLL {
 			STMT.setString(5, lugarOrigen);
 			
 			STMT.executeUpdate();
-			CONEXION.close();
 			return true;
 			
 		} catch (Exception e) {
@@ -38,6 +40,38 @@ public class ClienteDLL {
 		}
 		
 		
+	}
+	
+	public static Cliente traerUltimoCliente() {
+		
+		String sql = "SELECT * FROM clientes WHERE idcliente = (SELECT MAX(idcliente) FROM clientes)";
+		Cliente c = null;
+		String[] datos = new String[6];
+		try {
+			
+			STMT = CONEXION.prepareStatement(sql);
+			
+			ResultSet resultados =	STMT.executeQuery();
+			while(resultados.next()) {
+				
+				datos[0] = resultados.getString(1);
+				datos[1] = resultados.getString(2);
+				datos[2] = resultados.getString(3);
+				datos[3] = resultados.getString(4);
+				datos[4] = resultados.getString(5);
+				datos[5] = resultados.getString(6);
+
+				c = new Cliente (Integer.valueOf(datos[0]),datos[1],datos[2],Integer.parseInt(datos[3]),Integer.valueOf(datos[4]), datos[5]);
+			}
+			if(resultados.wasNull()) { 
+				return null; }
+			else {
+				return c;
+			}
+		} catch (Exception e) {
+			System.out.println("Error al mostrar el último cliente: " + e);
+			return null;
+		}		
 	}
 	
 }

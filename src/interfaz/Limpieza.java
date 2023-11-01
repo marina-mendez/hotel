@@ -16,10 +16,11 @@ public class Limpieza {
 			switch(opcion) {
 			case 0:
 			//Ver habitaciones
-
+				JOptionPane.showMessageDialog(null,"Disponible próximamente.");  
 				break;
 			default:
 			//Limpiar habitaciones
+				JOptionPane.showMessageDialog(null,"Disponible próximamente.");  
 				break;
 			}
 		} while(opcion!=2);

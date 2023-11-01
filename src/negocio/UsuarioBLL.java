@@ -189,33 +189,6 @@ public class UsuarioBLL {
 		
 		return palabra;	
 	}
-	
-	
-	
-	public static String validarDni() {
-			
-		boolean caracterCorrecto =false;
-		String listaCaracteres = "";
-		String dni ="";
-		
-		do {
-			
-			dni = JOptionPane.showInputDialog("Ingrese su DNI:");
-			
-			if(!dni.isEmpty()) {
-				String patron = "^[0-9]+$";
-				if(dni.matches(patron)) {
-					caracterCorrecto=true;
-				}else {
-					JOptionPane.showMessageDialog(null, "Recuerde que el DNI sólo puede contener números.");
-				}
-			}
-		}while(caracterCorrecto==false);
-		
-		return dni;
-	
-		
-	}
 
 	public LinkedList<UsuarioDLL> MostrarUsuario(String nombre, String pass) {
 	
@@ -230,7 +203,6 @@ public class UsuarioBLL {
 
 	public static int validarRol() {
 		boolean caracterCorrecto =false;
-		String listaCaracteres = "";
 		int rol=0;
 		
 		do {

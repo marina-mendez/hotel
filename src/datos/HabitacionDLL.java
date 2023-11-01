@@ -30,8 +30,66 @@ public class HabitacionDLL {
 		this.limpieza=limpieza;
 		// TODO Auto-generated constructor stub
 	}
-	
-	
+
+	public String getId() {
+		return id;
+	}
+
+
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+
+
+	public String getOcupantes() {
+		return ocupantes;
+	}
+
+
+
+	public void setOcupantes(String ocupantes) {
+		this.ocupantes = ocupantes;
+	}
+
+
+
+	public String getRestantes() {
+		return restantes;
+	}
+
+
+
+	public void setRestantes(String restantes) {
+		this.restantes = restantes;
+	}
+
+
+
+	public String getPiso() {
+		return piso;
+	}
+
+
+
+	public void setPiso(String piso) {
+		this.piso = piso;
+	}
+
+
+
+	public String getLimpieza() {
+		return limpieza;
+	}
+
+
+
+	public void setLimpieza(String limpieza) {
+		this.limpieza = limpieza;
+	}
+
+
 
 	public static boolean guardarHabitacion(int ocupantes, int piso) {
 
@@ -78,14 +136,14 @@ public class HabitacionDLL {
 		
 		
 	}
-	public static boolean Eliminar(String nombre) {
+	public static boolean eliminar(int idhabitacion) {
 
-		String sql = "DELETE FROM `persona` WHERE nombre=?";
+		String sql = "DELETE FROM `habitaciones` WHERE idhabitacion=?";
 		try {
 			
 			STMT = CONEXION.prepareStatement(sql);
 			
-			STMT.setString(1, nombre);
+			STMT.setLong(1, idhabitacion);
 			STMT.executeUpdate();
 			CONEXION.close();
 			return true;
@@ -169,6 +227,67 @@ public class HabitacionDLL {
 			
 		} catch (Exception e) {
 			System.out.println("Error al mostrar la habitación: " + e);
+			return null;
+		}
+		
+	}
+	
+	public static boolean actualizarOcupacion(int idHabitacion, int ocupantes ) {
+
+		String sql = "UPDATE `habitaciones` SET `restantes`=? WHERE `idhabitacion`= ?";
+		try {
+			
+			STMT = CONEXION.prepareStatement(sql);
+			
+			STMT.setLong(1, ocupantes);
+			STMT.setLong(2, idHabitacion);
+			
+			STMT.executeUpdate();
+			CONEXION.close();
+			return true;
+			
+		} catch (Exception e) {
+			System.out.println("Error al actualizar ocupación: " + e);
+			return false;
+		}
+		
+		
+	}
+	
+	
+	
+	public static LinkedList<HabitacionDLL> mostrarHabitacionDisponible(String numero) {
+		LinkedList<HabitacionDLL> habitaciones = new LinkedList<HabitacionDLL>();
+		String sql = "SELECT * FROM `habitaciones` WHERE restantes>?";
+		
+		String[] datos = new String[5];
+		try {
+			
+			STMT = CONEXION.prepareStatement(sql);
+			STMT.setString(1, numero);
+			
+			ResultSet resultados =	STMT.executeQuery();
+			System.out.println(resultados);
+			while(resultados.next()) {
+				
+				datos[0] = resultados.getString(1);
+				datos[1] = resultados.getString(2);
+				datos[2] = resultados.getString(3);
+				datos[3] = resultados.getString(4);
+				datos[4] = resultados.getString(5);
+				
+				habitaciones.add(new HabitacionDLL(datos[0],datos[1],datos[2],datos[3], datos[4]));
+			}
+			
+			if(habitaciones.isEmpty()) {
+				JOptionPane.showMessageDialog(null, resultados);
+				return null;
+			}else {
+				return habitaciones;
+			}
+			
+		} catch (Exception e) {
+			System.out.println("Error al mostrar las habitaciones con lugares restantes: " + e);
 			return null;
 		}
 		
