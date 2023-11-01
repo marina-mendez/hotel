@@ -80,5 +80,25 @@ public class HabitacionBLL {
 		JOptionPane.showMessageDialog(null, "No se pudo eliminar la habitación.");
 		}
 	}
+
+	public static void verHabitaciones() {
+
+		String mensaje="Lista de habitaciones\n ____________";
+		
+		LinkedList<HabitacionDLL> listaDeHabitaciones = HabitacionDLL.mostrarHabitaciones();
+		
+		for (HabitacionDLL hdll : listaDeHabitaciones) {
+			
+			mensaje+= "\nID HABITACIÓN: " + hdll.getId();
+			mensaje+= "\nN° OCUPANTES: " + hdll.getOcupantes();
+			mensaje+= "\nN° RESTANTES: " + hdll.getRestantes();
+			mensaje+= "\nN° PISO: " + hdll.getPiso();
+			mensaje+= "\nLIMPIEZA: " + hdll.getLimpieza();
+			mensaje+= "\n____________";
+
+		}		
+		
+		JOptionPane.showMessageDialog(null, mensaje);		
+	}
 	
 }

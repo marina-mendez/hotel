@@ -26,7 +26,7 @@ public class Administracion {
 			
 			switch(opcion) {
 			case "Ver habitaciones":
-				JOptionPane.showMessageDialog(null, HabitacionDLL.mostrarHabitaciones());  
+				HabitacionBLL.verHabitaciones();
 				break;
 			case "Agregar habitaciones":
 				agregarHabitacion();
