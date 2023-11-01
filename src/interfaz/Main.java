@@ -16,7 +16,6 @@ public class Main {
 		
 		while(!logueo) {
 			String respuestaLogin = (String) JOptionPane.showInputDialog(null, "Hotel House Hunter: Login", null, 1, null, login, login[0]);
-			System.out.println(respuestaLogin);
 			if (respuestaLogin.equalsIgnoreCase("Iniciar Sesión")) {
 					logueo =user.inicioSesion();
 			}else {
@@ -44,10 +43,11 @@ public class Main {
 				Administracion a = new Administracion();
 				a.verPantalla();
 					break;
-				default:
-				//Módulo Reservar
+				case 2:
 				Reserva r = new Reserva();
 				r.verPantalla();
+					break;
+				default:
 					break;
 				}
 			} while(opcion!=3);

@@ -16,8 +16,6 @@ public class Administracion {
 				"Ver habitaciones", "Agregar habitaciones", "Eliminar habitaciones", "Ver juegos", "Agregar juegos","Eliminar juegos", "Salir"
 		};
 		String opcion;
-
-		//Administrador.inicioSesion();
 		
 		do {
 			
@@ -40,9 +38,11 @@ public class Administracion {
 			case "Agregar juegos":
 				JOptionPane.showMessageDialog(null,"Disponible próximamente.");  
 				break;
-			default:
+			case "Eliminar juegos":
 			//Eliminar juegos
 				JOptionPane.showMessageDialog(null,"Disponible próximamente.");  
+				break;
+			default:
 				break;
 			}
 		} while(!opcion.equalsIgnoreCase("Salir"));

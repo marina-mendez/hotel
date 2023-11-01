@@ -12,8 +12,6 @@ public class Reserva {
 				"Ver reservas", "Reservar habitación", "Eliminar reserva de habitación", "Ver juegos", "Reservar juego","Eliminar reserva de juegos", "Salir"
 		};
 		String opcion;
-
-		//Recepcionista.inicioSesion();
 		
 		do {
 			
@@ -38,8 +36,7 @@ public class Reserva {
 			case "Reservar juego":
 				JOptionPane.showMessageDialog(null,"Disponible próximamente.");  
 				break;
-			default:
-			//Eliminar reserva de juegos
+			case "Eliminar reserva de juegos":
 				JOptionPane.showMessageDialog(null,"Disponible próximamente.");  
 				break;
 			}
