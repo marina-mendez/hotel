@@ -20,6 +20,7 @@ public class UsuarioBLL {
 		this.pass = pass;
 		this.rol = rol;
 	}
+	
 
 	public UsuarioBLL() {
 		
@@ -221,6 +222,12 @@ public class UsuarioBLL {
 		}while(caracterCorrecto==false);
 		
 		return rol;
+	}
+
+
+	@Override
+	public String toString() {
+		return "UsuarioBLL [id=" + id + ", nombre=" + nombre + ", pass=" + pass + ", rol=" + rol + "]";
 	}
 	
 }

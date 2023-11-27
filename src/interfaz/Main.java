@@ -35,8 +35,8 @@ public class Main {
 				switch(opcion) {
 				case 0:
 				//Módulo Limpieza
-				Limpieza l = new Limpieza();
-				l.verPantalla();
+				//Limpieza l = new Limpieza();
+				//l.verPantalla();
 					break;
 				case 1:
 				//Módulo Administración

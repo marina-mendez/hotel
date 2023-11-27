@@ -129,9 +129,13 @@ public class UsuarioDLL {
 			while(resultados.next()) {
 				
 				datos[0] = resultados.getString(1);
+				System.out.println(datos[0]);
 				datos[1] = resultados.getString(2);
+				System.out.println(datos[1]);
 				datos[2] = resultados.getString(3);
+				System.out.println(datos[2]);
 				datos[3] = resultados.getString(4);
+				System.out.println(datos[3]);
 				listaDeUsuarios.add(new UsuarioDLL(datos[0],datos[1],datos[2],Integer.parseInt(datos[3])));
 			}
 			
@@ -150,6 +154,41 @@ public class UsuarioDLL {
 		
 		
 	}
+	
+	public static int mostrarRol(String nombre, String pass) {
+		
+		String sql = "SELECT rol FROM `usuarios` WHERE nombre=? and pass=?";
+		
+		String[] datos = new String[4];
+		try {
+			
+			STMT = CONEXION.prepareStatement(sql);
+			STMT.setString(1, nombre);
+			STMT.setString(2, pass);
+			
+			ResultSet resultados =	STMT.executeQuery();
+			while(resultados.next()) {
+				
+				datos[0] = resultados.getString(1);
+				System.out.println(datos[0]);
+			}
+			
+			
+			if(datos[0].isEmpty()) {
+				return (Integer) null;
+			}else {
+				
+				return Integer.valueOf(datos[0]);
+			}
+			
+		} catch (Exception e) {
+			System.out.println("Error al mostrar el usuario: " + e);
+			return (Integer) null;
+		}
+		
+		
+	}
 
+	
 	
 }
