@@ -137,7 +137,8 @@ public class PRecepcionista extends JFrame {
         if (selectedButton == btnVerReserva.getModel()) {
 			r.verReservas();
         } else if (selectedButton == btnAgregarReserva.getModel()) {
-			r.pedirDatosCliente();
+        	AgregarCliente ac = new AgregarCliente();
+        	ac.run();
         }else if (selectedButton == btnEliminarReserva.getModel()) {
 			r.eliminarReserva();
         }else if (selectedButton == btnVerJuegos.getModel()) {

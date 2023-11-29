@@ -91,37 +91,6 @@ public class ReservaHabitacion implements ReservaBLL{
 	public void setNumeroOcupantes(int numeroOcupantes) {
 		this.numeroOcupantes = numeroOcupantes;
 	}
-
-
-
-	@Override
-	public void pedirDatosCliente() {
-		
-		boolean datosCliente = false;
-		
-		do {
-
-			String nombreCliente = validarString("nombre del cliente");
-			String apellidoCliente = validarString("apellido del cliente");
-			String edad;
-		
-			do {
-				edad = validarNumero("edad. Debe ser mayor de edad");
-			}while(Integer.valueOf(edad)<18);
-			
-			String numeroSeguro = validarNumero("número de seguro del cliente");	
-			String lugarOrigen = validarString("lugar de origen");
-			
-			if(ClienteDLL.guardarCliente(nombreCliente, apellidoCliente, Integer.valueOf(edad), Integer.valueOf(numeroSeguro), lugarOrigen)) {
-				JOptionPane.showMessageDialog(null, "Cliente agregado!", "Hotel House Hunter",JOptionPane.DEFAULT_OPTION);
-				datosCliente=true;
-				hacerReserva();
-			}else {
-				JOptionPane.showMessageDialog(null, "No se pudo agregar al cliente.");
-			}
-		}while(datosCliente==false);
-		
-	}
 	
 	@Override
 	public void hacerReserva() {
@@ -299,6 +268,12 @@ public class ReservaHabitacion implements ReservaBLL{
 		}		
 		
 		JOptionPane.showMessageDialog(null, mensaje);
+	}
+
+	@Override
+	public void pedirDatosCliente() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

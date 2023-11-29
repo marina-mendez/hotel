@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
@@ -24,11 +25,15 @@ public class TablaHabitaciones extends JFrame {
 	private JPanel contentPane;
 	private JTable table;
 	private JLabel lblSeleccionarUnaHabitacin;
-	private JButton btnNewButton;
+	private JButton btnEditar;
 	private JButton btnEliminar;
 	private JButton btnSalir;
 	private JLabel lblSeleccionarUnaOpcin;
 	private JTextField seleccion;
+	private JLabel lblNewLabel;
+	private JTextField textFieldOcupantes;
+	private JTextField textFieldRestantes;
+	private JTextField textFieldLimpieza;
 
 	/**
 	 * Launch the application.
@@ -48,7 +53,7 @@ public class TablaHabitaciones extends JFrame {
 	 */
 	public TablaHabitaciones() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 542, 444);
+		setBounds(100, 100, 542, 509);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -62,7 +67,7 @@ public class TablaHabitaciones extends JFrame {
 		contentPane.add(lblAdmin);
 		
 		table = new JTable();
-		table.setBounds(86, 87, 370, 203);
+		table.setBounds(86, 87, 370, 163);
 		contentPane.add(table);
 		
 		DefaultTableModel tabla = new DefaultTableModel();
@@ -85,32 +90,123 @@ public class TablaHabitaciones extends JFrame {
 		lblSeleccionarUnaHabitacin.setBounds(86, 56, 370, 20);
 		contentPane.add(lblSeleccionarUnaHabitacin);
 		
-		btnNewButton = new JButton("Editar");
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnNewButton.setBounds(218, 359, 106, 23);
-		contentPane.add(btnNewButton);
+		btnEditar = new JButton("Editar");
+		btnEditar.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnEditar.setBounds(218, 323, 106, 23);
+		contentPane.add(btnEditar);
 		
 		btnEliminar = new JButton("Eliminar");
 		btnEliminar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnEliminar.setBounds(86, 359, 106, 23);
+		btnEliminar.setBounds(86, 323, 106, 23);
 		contentPane.add(btnEliminar);
 		
 		btnSalir = new JButton("Salir");
 		btnSalir.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnSalir.setBounds(350, 359, 106, 23);
+		btnSalir.setBounds(350, 323, 106, 23);
 		contentPane.add(btnSalir);
 		
 		lblSeleccionarUnaOpcin = new JLabel("Seleccionar una opción:");
 		lblSeleccionarUnaOpcin.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSeleccionarUnaOpcin.setFont(new Font("Corbel", Font.PLAIN, 15));
-		lblSeleccionarUnaOpcin.setBounds(86, 301, 370, 20);
+		lblSeleccionarUnaOpcin.setBounds(86, 261, 370, 20);
 		contentPane.add(lblSeleccionarUnaOpcin);
 		
 		seleccion = new JTextField();
-		seleccion.setFont(new Font("Corbel", Font.PLAIN, 13));
-		seleccion.setBounds(86, 328, 370, 20);
+		seleccion.setHorizontalAlignment(SwingConstants.CENTER);
+		seleccion.setFont(new Font("Arial", Font.PLAIN, 12));
+		seleccion.setBounds(86, 292, 370, 20);
 		contentPane.add(seleccion);
 		seleccion.setColumns(10);
+		
+		lblNewLabel = new JLabel("New label");
+		lblNewLabel.setBounds(146, 111, 46, 14);
+		contentPane.add(lblNewLabel);
+		
+		textFieldOcupantes = new JTextField();
+		textFieldOcupantes.setBounds(168, 377, 95, 20);
+		contentPane.add(textFieldOcupantes);
+		textFieldOcupantes.setColumns(10);
+		textFieldOcupantes.setVisible(false);
+
+		textFieldRestantes = new JTextField();
+		textFieldRestantes.setColumns(10);
+		textFieldRestantes.setBounds(168, 408, 95, 20);
+		contentPane.add(textFieldRestantes);
+		textFieldRestantes.setVisible(false);
+
+		textFieldLimpieza = new JTextField();
+		textFieldLimpieza.setColumns(10);
+		textFieldLimpieza.setBounds(168, 439, 95, 20);
+		contentPane.add(textFieldLimpieza);
+		textFieldLimpieza.setVisible(false);
+		
+		JLabel lblOcupantes = new JLabel("Ocupantes");
+		lblOcupantes.setBounds(98, 380, 60, 14);
+		contentPane.add(lblOcupantes);
+		lblOcupantes.setVisible(false);
+		
+		JLabel lblRestantes = new JLabel("Restantes");
+		lblRestantes.setBounds(98, 411, 60, 14);
+		contentPane.add(lblRestantes);
+		lblRestantes.setVisible(false);
+
+		JLabel lblLimpieza = new JLabel("Limpieza");
+		lblLimpieza.setBounds(98, 442, 60, 14);
+		contentPane.add(lblLimpieza);
+		lblLimpieza.setVisible(false);
+		
+		JButton btnAceptarEditar = new JButton("Aceptar");
+		btnAceptarEditar.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnAceptarEditar.setBounds(308, 405, 106, 23);
+		contentPane.add(btnAceptarEditar);
+		btnAceptarEditar.setVisible(false);
+
+		
+		btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int fila = table.getSelectedRow();
+				int id = Integer.valueOf((String)table.getValueAt(fila, 0));
+				boolean eliminar =HabitacionDLL.eliminar(id);
+
+				if(eliminar) {
+					JOptionPane.showMessageDialog(null, "Habitacion eliminada.");
+				}else {
+					JOptionPane.showMessageDialog(null, "No se pudo eliminar la habitación.");
+				}
+			}
+		});
+		
+		btnEditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+                
+				btnAceptarEditar.setVisible(true);
+				lblLimpieza.setVisible(true);
+				lblRestantes.setVisible(true);
+				lblOcupantes.setVisible(true);
+				textFieldLimpieza.setVisible(true);
+				textFieldOcupantes.setVisible(true);
+				textFieldRestantes.setVisible(true);
+
+				btnAceptarEditar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						String limpieza = textFieldLimpieza.getText();
+						String ocupantes =textFieldOcupantes.getText();
+						String restantes =textFieldRestantes.getText();
+						
+						int fila = table.getSelectedRow();
+						String id = (String)table.getValueAt(fila, 0);
+						boolean editar =HabitacionDLL.editar(ocupantes, restantes,limpieza,id);
+						
+						if(editar) {
+							JOptionPane.showMessageDialog(null, "Habitacion editada.");
+						}else {
+							JOptionPane.showMessageDialog(null, "No se pudo editar la habitación.");
+						}
+					}
+				});
+
+			}
+		});
 		
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

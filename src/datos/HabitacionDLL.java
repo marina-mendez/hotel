@@ -113,22 +113,23 @@ public class HabitacionDLL {
 		
 	}
 	
-	public static boolean editar(String nombre, String pass, int rol) {
+	public static boolean editar(String id, String ocupantes, String restantes, String limpieza) {
 
-		String sql = "UPDATE `usuario` SET `nombre`=?,`pass`=?,`rol`=? WHERE nombre= ?";
+		String sql = "UPDATE `habitaciones` SET `ocupantes`=?,`restantes`=?,`limpieza`=? WHERE idhabitacion= ?";
 		try {
 			
 			STMT = CONEXION.prepareStatement(sql);
 			
-			STMT.setString(1, nombre);
-			STMT.setString(1, pass);
-			STMT.setLong(3, rol);
+			STMT.setString(1, ocupantes);
+			STMT.setString(2, restantes);
+			STMT.setString(3, limpieza);
+			STMT.setString(4, id);
 			
 			STMT.executeUpdate();
 			return true;
 			
 		} catch (Exception e) {
-			System.out.println("Error al guardar");
+			System.out.println("Error al editar habitación: " + e);
 			return false;
 		}
 		
@@ -293,6 +294,24 @@ public class HabitacionDLL {
 	public String toString() {
 		return "Habitación "+ id + ": ocupantes=" + ocupantes + ", lugares restantes=" + restantes + ", piso=" + piso
 				+ ", limpieza=" + limpieza + "\n";
+	}
+
+	public static boolean cambiarLimpieza(int id, String estado) {
+		String sql = "UPDATE `habitaciones` SET `limpieza`=? WHERE `idhabitacion`= ?";
+		try {
+			
+			STMT = CONEXION.prepareStatement(sql);
+			
+			STMT.setString(1, estado);
+			STMT.setLong(2, id);
+			
+			STMT.executeUpdate();
+			return true;
+			
+		} catch (Exception e) {
+			System.out.println("Error al actualizar estado de la habitación: " + e);
+			return false;
+		}		
 	}
 	
 	
