@@ -3,10 +3,6 @@ package interfaz;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.LinkedList;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -15,9 +11,6 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import datos.ClienteDLL;
-import datos.HabitacionDLL;
-import datos.ReservaDLL;
-import negocio.Cliente;
 import negocio.ReservaHabitacion;
 
 import javax.swing.JTextField;

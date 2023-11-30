@@ -155,7 +155,8 @@ public class PAdministrador extends JFrame {
         } else if (selectedButton == btnAgregarHabitacion.getModel()) {
 			agregarHabitacion();
         }else if (selectedButton == btnVerJuegos.getModel()) {
-            System.out.println("btnAgregarJuegos");
+        	PJuegos pj = new PJuegos();
+        	pj.run();
         }else if (selectedButton == btnAgregarJuegos.getModel()) {
             System.out.println("btnAgregarJuegos");
         }else {

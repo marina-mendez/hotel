@@ -53,7 +53,7 @@ public class TablaHabitaciones extends JFrame {
 	 */
 	public TablaHabitaciones() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 542, 509);
+		setBounds(100, 100, 543, 474);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -67,7 +67,7 @@ public class TablaHabitaciones extends JFrame {
 		contentPane.add(lblAdmin);
 		
 		table = new JTable();
-		table.setBounds(86, 87, 370, 163);
+		table.setBounds(86, 87, 370, 138);
 		contentPane.add(table);
 		
 		DefaultTableModel tabla = new DefaultTableModel();
@@ -92,29 +92,29 @@ public class TablaHabitaciones extends JFrame {
 		
 		btnEditar = new JButton("Editar");
 		btnEditar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnEditar.setBounds(218, 323, 106, 23);
+		btnEditar.setBounds(218, 298, 106, 23);
 		contentPane.add(btnEditar);
 		
 		btnEliminar = new JButton("Eliminar");
 		btnEliminar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnEliminar.setBounds(86, 323, 106, 23);
+		btnEliminar.setBounds(86, 298, 106, 23);
 		contentPane.add(btnEliminar);
 		
 		btnSalir = new JButton("Salir");
 		btnSalir.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnSalir.setBounds(350, 323, 106, 23);
+		btnSalir.setBounds(350, 298, 106, 23);
 		contentPane.add(btnSalir);
 		
 		lblSeleccionarUnaOpcin = new JLabel("Seleccionar una opción:");
 		lblSeleccionarUnaOpcin.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSeleccionarUnaOpcin.setFont(new Font("Corbel", Font.PLAIN, 15));
-		lblSeleccionarUnaOpcin.setBounds(86, 261, 370, 20);
+		lblSeleccionarUnaOpcin.setBounds(86, 236, 370, 20);
 		contentPane.add(lblSeleccionarUnaOpcin);
 		
 		seleccion = new JTextField();
 		seleccion.setHorizontalAlignment(SwingConstants.CENTER);
 		seleccion.setFont(new Font("Arial", Font.PLAIN, 12));
-		seleccion.setBounds(86, 292, 370, 20);
+		seleccion.setBounds(86, 267, 370, 20);
 		contentPane.add(seleccion);
 		seleccion.setColumns(10);
 		
@@ -123,41 +123,41 @@ public class TablaHabitaciones extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		textFieldOcupantes = new JTextField();
-		textFieldOcupantes.setBounds(168, 377, 95, 20);
+		textFieldOcupantes.setBounds(208, 345, 95, 20);
 		contentPane.add(textFieldOcupantes);
 		textFieldOcupantes.setColumns(10);
 		textFieldOcupantes.setVisible(false);
 
 		textFieldRestantes = new JTextField();
 		textFieldRestantes.setColumns(10);
-		textFieldRestantes.setBounds(168, 408, 95, 20);
+		textFieldRestantes.setBounds(208, 376, 95, 20);
 		contentPane.add(textFieldRestantes);
 		textFieldRestantes.setVisible(false);
 
 		textFieldLimpieza = new JTextField();
 		textFieldLimpieza.setColumns(10);
-		textFieldLimpieza.setBounds(168, 439, 95, 20);
+		textFieldLimpieza.setBounds(208, 407, 95, 20);
 		contentPane.add(textFieldLimpieza);
 		textFieldLimpieza.setVisible(false);
 		
 		JLabel lblOcupantes = new JLabel("Ocupantes");
-		lblOcupantes.setBounds(98, 380, 60, 14);
+		lblOcupantes.setBounds(98, 345, 94, 14);
 		contentPane.add(lblOcupantes);
 		lblOcupantes.setVisible(false);
 		
 		JLabel lblRestantes = new JLabel("Restantes");
-		lblRestantes.setBounds(98, 411, 60, 14);
+		lblRestantes.setBounds(98, 376, 94, 14);
 		contentPane.add(lblRestantes);
 		lblRestantes.setVisible(false);
 
 		JLabel lblLimpieza = new JLabel("Limpieza");
-		lblLimpieza.setBounds(98, 442, 60, 14);
+		lblLimpieza.setBounds(98, 407, 94, 14);
 		contentPane.add(lblLimpieza);
 		lblLimpieza.setVisible(false);
 		
 		JButton btnAceptarEditar = new JButton("Aceptar");
 		btnAceptarEditar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnAceptarEditar.setBounds(308, 405, 106, 23);
+		btnAceptarEditar.setBounds(350, 374, 106, 23);
 		contentPane.add(btnAceptarEditar);
 		btnAceptarEditar.setVisible(false);
 

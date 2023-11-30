@@ -14,8 +14,6 @@ import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import negocio.ReservaHabitacion;
-
 public class PRecepcionista extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -110,16 +108,16 @@ public class PRecepcionista extends JFrame {
 			}
 		});
 		
-				JButton btnAceptarAdministracion = new JButton("Aceptar");
-				btnAceptarAdministracion.setFont(new Font("Tahoma", Font.PLAIN, 14));
-				btnAceptarAdministracion.setBounds(109, 201, 93, 36);
-				contentPane.add(btnAceptarAdministracion);
+		JButton btnAceptarAdministracion = new JButton("Aceptar");
+		btnAceptarAdministracion.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnAceptarAdministracion.setBounds(109, 201, 93, 36);
+		contentPane.add(btnAceptarAdministracion);
 				
-				btnAceptarAdministracion.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            	handleRadioButtonSelection();
-            }
+		btnAceptarAdministracion.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+           	handleRadioButtonSelection();
+        	}
         });
 		
 		JLabel lblElijaUnaOpcin = new JLabel("Elija una opción:");
@@ -130,17 +128,16 @@ public class PRecepcionista extends JFrame {
 
 	}
 	private void handleRadioButtonSelection() {
-		ReservaHabitacion r = new ReservaHabitacion();
-        // Get the selected radio button from the ButtonGroup
         ButtonModel selectedButton = btnsRecepcion.getSelection();
-        
+      
         if (selectedButton == btnVerReserva.getModel()) {
-			r.verReservas();
-        } else if (selectedButton == btnAgregarReserva.getModel()) {
+        	EliminarReserva er = new EliminarReserva();
+        	er.run();        } else if (selectedButton == btnAgregarReserva.getModel()) {
         	AgregarCliente ac = new AgregarCliente();
         	ac.run();
         }else if (selectedButton == btnEliminarReserva.getModel()) {
-			r.eliminarReserva();
+        	EliminarReserva er = new EliminarReserva();
+        	er.run();
         }else if (selectedButton == btnVerJuegos.getModel()) {
             System.out.println("btnAgregarJuegos");
         }else if (selectedButton == btnAgregarReservaJuegos.getModel()) {

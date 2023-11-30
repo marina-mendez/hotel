@@ -89,8 +89,7 @@ public class PLimpieza extends JFrame {
 		btnSalir.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Bienvenida b = new Bienvenida();
-				b.run();
+				dispose();
 			}
 		});
 		

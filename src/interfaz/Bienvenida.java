@@ -130,7 +130,7 @@ public class Bienvenida extends JFrame {
 			}
 		});
 		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnLogin.setBounds(305, 261, 98, 32);
+		btnLogin.setBounds(304, 262, 98, 32);
 		contentPane.add(btnLogin);
 		
 		contrasenia = new JPasswordField();
@@ -143,8 +143,6 @@ public class Bienvenida extends JFrame {
 		lblNewLabel.setIcon(new ImageIcon(new ImageIcon("C:\\Users\\DELL\\Desktop\\Marina\\PA\\hotel\\src\\img\\hotel.jpg").getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH)));
 		lblNewLabel.setBounds(10, 68, 264, 213);
 		contentPane.add(lblNewLabel);
-		
-
 		
 		
 	}

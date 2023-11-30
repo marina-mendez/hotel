@@ -111,44 +111,6 @@ public class UsuarioBLL {
 
 	}
 	
-	/*public boolean ValidarEditar(String nombre,String apellido,String dni,int rol) {
-		
-		
-		if (nombre.length()==0) {
-			JOptionPane.showMessageDialog(null, "Nombre vacio");
-			return false;
-		}else {
-			persona.setNombre(nombre);
-			persona.setApellido(apellido);
-			persona.setDni(dni);
-			persona.setRol(rol);
-			if( persona.editar()) {
-				return true;
-			}else {
-				return false;
-			}
-		}
-
-	}
-
-	public boolean ValidarEliminar(String dni) {
-	
-		if (dni.length()==0) {
-			JOptionPane.showMessageDialog(null, "dni vacio");
-			return false;
-		}else {
-			persona.setDni(dni);
-			if( persona.Eliminar()) {
-				return true;
-			}else {
-				return false;
-			}
-		}
-
-	}*/
-
-
-
 	public static String validarAlfanumerico(String campo) {
 		
 		boolean caracterCorrecto =false;
