@@ -11,8 +11,6 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import datos.ClienteDLL;
-import negocio.ReservaHabitacion;
-
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Color;
@@ -26,6 +24,7 @@ public class AgregarCliente extends JFrame {
 	private JTextField edadCliente;
 	private JTextField numeroSeguro;
 	private JTextField lugarOrigen;
+	private JTextField ocupantes;
 
 	/**
 	 * Launch the application.
@@ -44,7 +43,7 @@ public class AgregarCliente extends JFrame {
 	 */
 	public AgregarCliente() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 557, 298);
+		setBounds(100, 100, 557, 330);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -107,28 +106,37 @@ public class AgregarCliente extends JFrame {
 		
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		btnAceptar.setBounds(224, 223, 98, 30);
+		btnAceptar.setBounds(226, 250, 98, 30);
 		contentPane.add(btnAceptar);
 		
 		JLabel lblErrorNombre = new JLabel("El nombre o apellido del \r\ncliente son inválidos. \r\nAsegurarse de no ingresar \r\nningún caracter especial.");
 		lblErrorNombre.setHorizontalAlignment(SwingConstants.CENTER);
 		lblErrorNombre.setForeground(new Color(255, 0, 0));
-		lblErrorNombre.setBounds(24, 191, 489, 21);
+		lblErrorNombre.setBounds(17, 218, 489, 21);
 		contentPane.add(lblErrorNombre);
 		lblErrorNombre.setVisible(false);
 		
 		JLabel lblMayoriaEdad = new JLabel("El cliente debe ser mayor de edad para realizar una reserva.");
 		lblMayoriaEdad.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMayoriaEdad.setForeground(Color.RED);
-		lblMayoriaEdad.setBounds(24, 191, 489, 21);
+		lblMayoriaEdad.setBounds(17, 218, 489, 21);
 		contentPane.add(lblMayoriaEdad);
 		lblMayoriaEdad.setVisible(false);
 		
 		JLabel lblErrorSeguro = new JLabel("El número de seguro es inválido. Asegurarse de que contenga 9 dígitos numéricos.");
 		lblErrorSeguro.setHorizontalAlignment(SwingConstants.CENTER);
 		lblErrorSeguro.setForeground(Color.RED);
-		lblErrorSeguro.setBounds(24, 191, 489, 21);
+		lblErrorSeguro.setBounds(17, 218, 489, 21);
 		contentPane.add(lblErrorSeguro);
+		
+		ocupantes = new JTextField();
+		ocupantes.setColumns(10);
+		ocupantes.setBounds(273, 187, 159, 20);
+		contentPane.add(ocupantes);
+		
+		JLabel lblNmeroDeOcupantes = new JLabel("Número de ocupantes");
+		lblNmeroDeOcupantes.setBounds(154, 186, 109, 21);
+		contentPane.add(lblNmeroDeOcupantes);
 		lblErrorSeguro.setVisible(false);
 		
 		btnAceptar.addActionListener(new ActionListener() {
@@ -152,8 +160,8 @@ public class AgregarCliente extends JFrame {
 							
 							if(ClienteDLL.guardarCliente(nombreCliente.getText(), apellidoCliente.getText(), Integer.valueOf(edadCliente.getText()), Integer.valueOf(numeroSeguro.getText()), lugarOrigen.getText())) {
 								JOptionPane.showMessageDialog(null, "Cliente agregado!", "Hotel House Hunter",JOptionPane.DEFAULT_OPTION);
-								ReservaHabitacion r = new ReservaHabitacion();
-								r.hacerReserva();
+								PAgregarReserva ar = new PAgregarReserva(Integer.valueOf(ocupantes.getText()));
+								ar.run();
 							}else {
 								JOptionPane.showMessageDialog(null, "No se pudo agregar al cliente.");
 								dispose();
@@ -195,6 +203,4 @@ public class AgregarCliente extends JFrame {
 			return false;
 		}
 	}
-	
-	
 }
