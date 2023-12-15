@@ -1,7 +1,7 @@
 package interfaz;
 
-import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,10 +14,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import datos.JuegosDLL;
-import datos.ReservaDLL;
-import negocio.ReservaHabitacion;
-
 import javax.swing.JTextField;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTable;
 
@@ -31,8 +29,7 @@ public class EditarJuegos extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
+
 			public void run() {
 				try {
 					EditarJuegos frame = new EditarJuegos();
@@ -41,9 +38,6 @@ public class EditarJuegos extends JFrame {
 					e.printStackTrace();
 				}
 			}
-		});
-	}
-
 	/**
 	 * Create the frame.
 	 */
@@ -59,7 +53,7 @@ public class EditarJuegos extends JFrame {
 		JLabel lblNewLabel = new JLabel("House Hunter: Sección de  Juegos");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Ink Free", Font.PLAIN, 20));
-		lblNewLabel.setBounds(79, 22, 280, 26);
+		lblNewLabel.setBounds(85, 22, 280, 26);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblnombredeljuego = new JLabel("Nombre del juego:");
@@ -81,29 +75,51 @@ public class EditarJuegos extends JFrame {
 
 		
 		JButton btnEditar = new JButton("Editar");
-		btnEditar.setBounds(127, 227, 89, 23);
+		btnEditar.setBounds(66, 226, 89, 23);
 		contentPane.add(btnEditar);
 		
 		table = new JTable();
-		table.setBounds(79, 103, 280, 112);
+		table.setBounds(129, 103, 192, 112);
 		contentPane.add(table);
 		
 		JLabel lblSeleccioneElJuego = new JLabel("Seleccione el juego que quiera editar:");
 		lblSeleccioneElJuego.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSeleccioneElJuego.setFont(new Font("Corbel", Font.PLAIN, 17));
-		lblSeleccioneElJuego.setBounds(79, 66, 280, 26);
+		lblSeleccioneElJuego.setBounds(85, 66, 280, 26);
 		contentPane.add(lblSeleccioneElJuego);
 		
 		DefaultTableModel tabla = new DefaultTableModel();
 		tabla.addColumn("ID");
 		tabla.addColumn("Nombre");
 
-		
+        // IMAGEN1
+        JLabel imageLabel = new JLabel();
+        imageLabel.setBounds(375, 11, 57, 55);
+        contentPane.add(imageLabel);
+
+        ImageIcon imageIcon = new ImageIcon("C:\\Users\\DELL\\Desktop\\Marina\\PA\\hotel\\src\\img\\pingpong.png");
+        Image scaledImage = imageIcon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(scaledImage);
+        imageLabel.setIcon(scaledIcon);
+
+        //IMAGEN 2
+        JLabel imageLabel2 = new JLabel();
+        imageLabel2.setBounds(19, 11, 50, 50);
+        contentPane.add(imageLabel2);
+        ImageIcon imageIcon2 = new ImageIcon("C:\\Users\\DELL\\Desktop\\Marina\\PA\\hotel\\src\\img\\futbol.png");
+        Image scaledImage2 = imageIcon2.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon2 = new ImageIcon(scaledImage2);
+        imageLabel2.setIcon(scaledIcon2);
+        
 		table.setModel(tabla);
 		
 		JButton btnSalir = new JButton("Salir");
-		btnSalir.setBounds(237, 227, 89, 23);
+		btnSalir.setBounds(293, 227, 89, 23);
 		contentPane.add(btnSalir);
+		
+		JButton btnEliminar = new JButton("Eliminar");
+		btnEliminar.setBounds(180, 227, 89, 23);
+		contentPane.add(btnEliminar);
 		
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -129,30 +145,46 @@ public class EditarJuegos extends JFrame {
 						int id = Integer.valueOf((String)table.getValueAt(fila, 0));
 						boolean editar =JuegosDLL.editarJuego(id, nuevoNombre.getText());
 
-						if(eliminar) {
-							JOptionPane.showMessageDialog(null, "Reserva eliminada.");
-							dispose();
+						if(editar) {
+							JOptionPane.showMessageDialog(null, "Juego editado.");
+							tabla.setRowCount(1);
+							for (JuegosDLL juego : JuegosDLL.mostrarJuegos()) {
+								tabla.addRow(new Object[] {juego.getId(), juego.getNombre()});
+							}
+							
+							table.revalidate();
+							table.repaint();
 						}else {
-							JOptionPane.showMessageDialog(null, "No se pudo eliminar la reserva.");
+							JOptionPane.showMessageDialog(null, "No se pudo editar el juego");
 							dispose();
 						}
 					}
 				});
 				
-				
+			}
+		});
+		
+		btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				int fila = table.getSelectedRow();
 				int id = Integer.valueOf((String)table.getValueAt(fila, 0));
-				boolean eliminar =JuegosDLL.editarJuego(id, nuevoNombre.getText());
+				boolean eliminar =JuegosDLL.eliminarJuego(id);
 
 				if(eliminar) {
-					JOptionPane.showMessageDialog(null, "Reserva eliminada.");
-					dispose();
+					JOptionPane.showMessageDialog(null, "Juego eliminado.");
+					tabla.setRowCount(1);
+					for (JuegosDLL juego : JuegosDLL.mostrarJuegos()) {
+						tabla.addRow(new Object[] {juego.getId(), juego.getNombre()});
+					}
+					
+					table.revalidate();
+					table.repaint();
 				}else {
-					JOptionPane.showMessageDialog(null, "No se pudo eliminar la reserva.");
+					JOptionPane.showMessageDialog(null, "No se pudo eliminar el juego.");
 					dispose();
 				}
 			}
 		});
+		
 	}
-
 }

@@ -160,10 +160,6 @@ public class AgregarCliente extends JFrame {
 								PRecepcionista pr = new PRecepcionista();
 								pr.run();
 							}
-							
-			                /*dispose();
-			                AgregarReserva ra = new AgregarReserva();
-			                ra.run();*/
 						}
 					}
 				}

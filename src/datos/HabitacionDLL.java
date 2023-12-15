@@ -147,7 +147,7 @@ public class HabitacionDLL {
 			return true;
 			
 		} catch (Exception e) {
-			System.out.println("Error al guardar");
+			System.out.println("Error al eliminar: " + e);
 			return false;
 		}
 		

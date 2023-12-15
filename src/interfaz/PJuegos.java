@@ -1,6 +1,8 @@
 package interfaz;
 
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -47,20 +49,20 @@ public class PJuegos extends JFrame {
 		lblNewLabel.setBounds(56, 23, 364, 27);
 		contentPane.add(lblNewLabel);
 		
-		JButton btnNewButton = new JButton("Agregar");
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		btnNewButton.setBounds(46, 240, 100, 35);
-		contentPane.add(btnNewButton);
+		JButton btnAgregar = new JButton("Agregar");
+		btnAgregar.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnAgregar.setBounds(46, 240, 100, 35);
+		contentPane.add(btnAgregar);
 		
-		JButton btnNewButton_1 = new JButton("Editar");
-		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		btnNewButton_1.setBounds(184, 240, 100, 35);
-		contentPane.add(btnNewButton_1);
+		JButton btnEditar = new JButton("Editar");
+		btnEditar.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnEditar.setBounds(184, 240, 100, 35);
+		contentPane.add(btnEditar);
 		
-		JButton btnNewButton_2 = new JButton("Salir");
-		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		btnNewButton_2.setBounds(319, 240, 100, 35);
-		contentPane.add(btnNewButton_2);
+		JButton btnSalir = new JButton("Salir");
+		btnSalir.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnSalir.setBounds(319, 240, 100, 35);
+		contentPane.add(btnSalir);
 		
         // IMAGEN1
         JLabel imageLabel = new JLabel();
@@ -72,7 +74,7 @@ public class PJuegos extends JFrame {
         ImageIcon scaledIcon = new ImageIcon(scaledImage);
         imageLabel.setIcon(scaledIcon);
 
-        //IMAGEN 3
+        //IMAGEN 2
         JLabel imageLabel2 = new JLabel();
         imageLabel2.setBounds(249, 90, 100, 100);
         contentPane.add(imageLabel2);
@@ -86,6 +88,28 @@ public class PJuegos extends JFrame {
         lblElegirUnaAccin.setFont(new Font("Corbel", Font.PLAIN, 15));
         lblElegirUnaAccin.setBounds(107, 209, 259, 20);
         contentPane.add(lblElegirUnaAccin);
+        
+        btnAgregar.addActionListener(new ActionListener() {
+  			public void actionPerformed(ActionEvent e) {
+  				AgregarJuego ed = new AgregarJuego();
+  				ed.run();
+  			}
+  		});
+        
+        btnEditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				EditarJuegos ed = new EditarJuegos();
+				ed.run();
+			}
+		});
+        
+        btnEditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PAdministrador i = new PAdministrador();
+				i.run();
+			}
+		});
 
 		
 	}

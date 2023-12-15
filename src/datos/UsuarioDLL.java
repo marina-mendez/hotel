@@ -155,6 +155,46 @@ public class UsuarioDLL {
 		
 	}
 	
+	public static LinkedList<UsuarioDLL> usuarioYaExiste(String nombre) {
+		LinkedList<UsuarioDLL> listaDeUsuarios = new LinkedList<UsuarioDLL>();
+		String sql = "SELECT * FROM `usuarios` WHERE nombre=?";
+		
+		String[] datos = new String[4];
+		try {
+			
+			STMT = CONEXION.prepareStatement(sql);
+			STMT.setString(1, nombre);
+			
+			ResultSet resultados =	STMT.executeQuery();
+			while(resultados.next()) {
+				
+				datos[0] = resultados.getString(1);
+				System.out.println(datos[0]);
+				datos[1] = resultados.getString(2);
+				System.out.println(datos[1]);
+				datos[2] = resultados.getString(3);
+				System.out.println(datos[2]);
+				datos[3] = resultados.getString(4);
+				System.out.println(datos[3]);
+				listaDeUsuarios.add(new UsuarioDLL(datos[0],datos[1],datos[2],Integer.parseInt(datos[3])));
+			}
+			
+			
+			if(listaDeUsuarios.isEmpty()) {
+				return null;
+			}else {
+				
+				return listaDeUsuarios;
+			}
+			
+		} catch (Exception e) {
+			System.out.println("Error al mostrar el usuario: " + e);
+			return null;
+		}
+		
+		
+	}
+	
 	public static int mostrarRol(String nombre, String pass) {
 		
 		String sql = "SELECT rol FROM `usuarios` WHERE nombre=? and pass=?";

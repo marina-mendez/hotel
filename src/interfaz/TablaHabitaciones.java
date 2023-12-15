@@ -170,6 +170,13 @@ public class TablaHabitaciones extends JFrame {
 
 				if(eliminar) {
 					JOptionPane.showMessageDialog(null, "Habitacion eliminada.");
+					tabla.setRowCount(1);
+					for (HabitacionDLL habitacion : HabitacionDLL.mostrarHabitaciones()) {
+						tabla.addRow(new Object[] {habitacion.getId(), habitacion.getOcupantes(), habitacion.getRestantes(), habitacion.getPiso(), habitacion.getLimpieza()});
+					}
+					
+					table.revalidate();
+					table.repaint();
 				}else {
 					JOptionPane.showMessageDialog(null, "No se pudo eliminar la habitación.");
 				}

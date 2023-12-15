@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
@@ -16,7 +17,11 @@ import java.util.LinkedList;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import javax.swing.ButtonModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import java.awt.Color;
+import javax.swing.JEditorPane;
+import java.awt.SystemColor;
 
 public class PAdministrador extends JFrame {
 
@@ -27,10 +32,9 @@ public class PAdministrador extends JFrame {
 	JRadioButton btnVerHabitaciones;
 	JRadioButton btnEliminarHabitacion;
 	JRadioButton btnVerJuegos;
-	JRadioButton btnAgregarJuegos;
-	JRadioButton btnEliminarJuegos;
 	private JButton btnSalir;
 	private JRadioButton btnEditarHabitacion;
+	private JEditorPane editorPane;
 
 	/**
 	 * Launch the application.
@@ -50,7 +54,7 @@ public class PAdministrador extends JFrame {
 	public PAdministrador() {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 431, 322);
+		setBounds(100, 100, 517, 356);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -58,49 +62,40 @@ public class PAdministrador extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblAdmin = new JLabel("House Hunter: Portal del Administador");
-		lblAdmin.setFont(new Font("Corbel", Font.PLAIN, 17));
+		lblAdmin.setForeground(Color.BLACK);
+		lblAdmin.setFont(new Font("Ink Free", Font.BOLD, 18));
 		lblAdmin.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAdmin.setBounds(65, 23, 306, 20);
+		lblAdmin.setBounds(72, 23, 356, 20);
 		contentPane.add(lblAdmin);
 
 		btnAgregarHabitacion = new JRadioButton("Agregar habitación");
-		btnAgregarHabitacion.setFont(new Font("Corbel", Font.PLAIN, 13));
-		btnAgregarHabitacion.setBounds(46, 128, 146, 23);
+		btnAgregarHabitacion.setFont(new Font("Corbel", Font.PLAIN, 15));
+		btnAgregarHabitacion.setBounds(78, 148, 146, 23);
 		contentPane.add(btnAgregarHabitacion);
 		
 		btnVerHabitaciones = new JRadioButton("Ver habitaciones");
-		btnVerHabitaciones.setFont(new Font("Corbel", Font.PLAIN, 13));
-		btnVerHabitaciones.setBounds(46, 102, 146, 23);
+		btnVerHabitaciones.setFont(new Font("Corbel", Font.PLAIN, 15));
+		btnVerHabitaciones.setBounds(78, 110, 146, 23);
 		contentPane.add(btnVerHabitaciones);
 		
 		btnEditarHabitacion = new JRadioButton("Editar habitación");
-		btnEditarHabitacion.setFont(new Font("Corbel", Font.PLAIN, 13));
-		btnEditarHabitacion.setBounds(46, 154, 146, 23);
+		btnEditarHabitacion.setFont(new Font("Corbel", Font.PLAIN, 15));
+		btnEditarHabitacion.setBounds(257, 110, 146, 23);
 		contentPane.add(btnEditarHabitacion);
 		
 		btnEliminarHabitacion = new JRadioButton("Eliminar habitación");
-		btnEliminarHabitacion.setFont(new Font("Corbel", Font.PLAIN, 13));
-		btnEliminarHabitacion.setBounds(46, 180, 146, 23);
+		btnEliminarHabitacion.setFont(new Font("Corbel", Font.PLAIN, 15));
+		btnEliminarHabitacion.setBounds(257, 148, 146, 23);
 		contentPane.add(btnEliminarHabitacion);
 		
-		btnVerJuegos = new JRadioButton("Ver juegos");
-		btnVerJuegos.setFont(new Font("Corbel", Font.PLAIN, 13));
-		btnVerJuegos.setBounds(241, 117, 109, 23);
+		btnVerJuegos = new JRadioButton("Portal de juegos");
+		btnVerJuegos.setFont(new Font("Corbel", Font.PLAIN, 15));
+		btnVerJuegos.setBounds(182, 187, 137, 23);
 		contentPane.add(btnVerJuegos);
-		
-		btnAgregarJuegos = new JRadioButton("Agregar juegos");
-		btnAgregarJuegos.setFont(new Font("Corbel", Font.PLAIN, 13));
-		btnAgregarJuegos.setBounds(241, 143, 109, 23);
-		contentPane.add(btnAgregarJuegos);
-	
-		btnEliminarJuegos = new JRadioButton("Eliminar juegos");
-		btnEliminarJuegos.setFont(new Font("Corbel", Font.PLAIN, 13));
-		btnEliminarJuegos.setBounds(241, 169, 109, 23);
-		contentPane.add(btnEliminarJuegos);
 
 		JButton btnAceptarAdministracion = new JButton("Aceptar");
 		btnAceptarAdministracion.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnAceptarAdministracion.setBounds(106, 226, 109, 33);
+		btnAceptarAdministracion.setBounds(97, 251, 109, 33);
 		contentPane.add(btnAceptarAdministracion);
 		
 		btnsAdministrador = new ButtonGroup();
@@ -109,8 +104,6 @@ public class PAdministrador extends JFrame {
 		btnsAdministrador.add(btnEditarHabitacion);
 		btnsAdministrador.add(btnEliminarHabitacion);
 		btnsAdministrador.add(btnVerJuegos);
-		btnsAdministrador.add(btnAgregarJuegos);
-		btnsAdministrador.add(btnEliminarJuegos);
 		
 		btnAceptarAdministracion.addActionListener(new ActionListener() {
             @Override
@@ -123,7 +116,7 @@ public class PAdministrador extends JFrame {
 		
 		btnSalir = new JButton("Salir");
 		btnSalir.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnSalir.setBounds(225, 226, 109, 33);
+		btnSalir.setBounds(285, 251, 109, 33);
 		contentPane.add(btnSalir);
 
 		btnSalir.addActionListener(new ActionListener() {
@@ -138,10 +131,21 @@ public class PAdministrador extends JFrame {
 		
 		
 		JLabel lblElijaUnaOpcin = new JLabel("Elija una opción:");
+		lblElijaUnaOpcin.setForeground(Color.BLACK);
 		lblElijaUnaOpcin.setHorizontalAlignment(SwingConstants.CENTER);
-		lblElijaUnaOpcin.setFont(new Font("Corbel", Font.PLAIN, 15));
-		lblElijaUnaOpcin.setBounds(65, 67, 306, 20);
+		lblElijaUnaOpcin.setFont(new Font("Ink Free", Font.PLAIN, 18));
+		lblElijaUnaOpcin.setBounds(97, 67, 306, 20);
 		contentPane.add(lblElijaUnaOpcin);
+		
+		editorPane = new JEditorPane();
+		editorPane.setBackground(SystemColor.control);
+		editorPane.setBounds(57, 54, 371, 181);
+		contentPane.add(editorPane);
+		
+		JLabel lblNewLabel1 = new JLabel("");
+		contentPane.add(lblNewLabel1);
+		lblNewLabel1.setIcon(new ImageIcon(new ImageIcon("C:\\Users\\DELL\\Desktop\\Marina\\PA\\hotel\\src\\img\\fondo-admin.jpg").getImage().getScaledInstance(900, 400, Image.SCALE_SMOOTH)));
+		lblNewLabel1.setBounds(-12, -18, 578, 434);
 
 	}
 	
@@ -154,13 +158,9 @@ public class PAdministrador extends JFrame {
         	th.run();
         } else if (selectedButton == btnAgregarHabitacion.getModel()) {
 			agregarHabitacion();
-        }else if (selectedButton == btnVerJuegos.getModel()) {
+        }else {
         	PJuegos pj = new PJuegos();
         	pj.run();
-        }else if (selectedButton == btnAgregarJuegos.getModel()) {
-            System.out.println("btnAgregarJuegos");
-        }else {
-            System.out.println("btnEliminarJuegos");
         }
     }
 	

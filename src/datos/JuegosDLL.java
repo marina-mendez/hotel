@@ -12,13 +12,13 @@ public class JuegosDLL {
 	
 	static PreparedStatement STMT;
 
-	private int id;
+	private String id;
 	private String nombre;
 	
-	public int getId() {
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getNombre() {
@@ -29,7 +29,7 @@ public class JuegosDLL {
 	}
 	
 
-	public JuegosDLL(int id, String nombre) {
+	public JuegosDLL(String id, String nombre) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -55,7 +55,7 @@ public class JuegosDLL {
 	
 	public static LinkedList<JuegosDLL> mostrarJuegos() {
 		LinkedList<JuegosDLL> juegos = new LinkedList<JuegosDLL>();
-		String sql = "SELECT * FROM `habitaciones`";
+		String sql = "SELECT * FROM `juegos`";
 		
 		String[] datos = new String [5];
 		try {
@@ -68,7 +68,7 @@ public class JuegosDLL {
 				datos[0] = resultados.getString(1);
 				datos[1] = resultados.getString(2);		
 				
-				JuegosDLL j = new JuegosDLL((Integer.valueOf(datos[0])),datos[1]);
+				JuegosDLL j = new JuegosDLL(datos[0],datos[1]);
 				
 				juegos.add(j);
 				
@@ -109,4 +109,59 @@ public class JuegosDLL {
 		
 	}
 	
+	public static LinkedList<JuegosDLL> mostrarJuego(String juego) {
+		LinkedList<JuegosDLL> juegos = new LinkedList<JuegosDLL>();
+		String sql = "SELECT * FROM `juegos` WHERE `nombre`=?";
+		
+		String[] datos = new String [5];
+		try {
+			
+			STMT = CONEXION.prepareStatement(sql);
+			STMT.setString(1, juego);
+
+			
+			ResultSet resultados =	STMT.executeQuery();
+			while(resultados.next()) {
+				
+				datos[0] = resultados.getString(1);
+				datos[1] = resultados.getString(2);		
+				
+				JuegosDLL j = new JuegosDLL(datos[0],datos[1]);
+				
+				juegos.add(j);
+				
+			}
+			if(juegos.isEmpty()) { 
+				System.out.println("empty");
+				return null; 
+				}
+			else {
+				return juegos;
+			}
+		} catch (Exception e) {
+			System.out.println("Error al mostrar juegos: " + e);
+			return null;
+		}
+		
+		
+	}
+	
+	public static boolean eliminarJuego(int idjuego) {
+
+		String sql = "DELETE FROM `juegos` WHERE idjuego=?";
+		try {
+			
+			STMT = CONEXION.prepareStatement(sql);
+			
+			STMT.setLong(1, idjuego);
+			STMT.executeUpdate();
+			return true;
+			
+		} catch (Exception e) {
+			System.out.println("Error al eliminar: " + e);
+			return false;
+		}
+		
+		
+	}
 }

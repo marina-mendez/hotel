@@ -1,6 +1,6 @@
 package interfaz;
 
-//import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JDateChooser;
 import javax.swing.*;
 
 import java.awt.EventQueue;
@@ -40,10 +40,10 @@ public class AgregarReserva extends JFrame {
         contentPane.setLayout(null);
 
         // Utilizando JDateChooser en lugar de JDatePicker
-       /* JDateChooser dateChooser = new JDateChooser();
+        JDateChooser dateChooser = new JDateChooser();
         dateChooser.setBounds(82, 120, 269, 20);
         contentPane.add(dateChooser);
-        */
+        
         JLabel lblAdmin = new JLabel("House Hunter: Portal del Recepcionista");
         lblAdmin.setBounds(82, 11, 269, 21);
         lblAdmin.setFont(new Font("Corbel", Font.PLAIN, 17));
