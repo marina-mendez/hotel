@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import datos.HabitacionDLL;
 import datos.UsuarioDLL;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -20,8 +21,6 @@ import javax.swing.ButtonModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Color;
-import javax.swing.JEditorPane;
-import java.awt.SystemColor;
 
 public class PAdministrador extends JFrame {
 
@@ -34,7 +33,6 @@ public class PAdministrador extends JFrame {
 	JRadioButton btnVerJuegos;
 	private JButton btnSalir;
 	private JRadioButton btnEditarHabitacion;
-	private JEditorPane editorPane;
 
 	/**
 	 * Launch the application.
@@ -137,10 +135,9 @@ public class PAdministrador extends JFrame {
 		lblElijaUnaOpcin.setBounds(97, 67, 306, 20);
 		contentPane.add(lblElijaUnaOpcin);
 		
-		editorPane = new JEditorPane();
-		editorPane.setBackground(SystemColor.control);
-		editorPane.setBounds(57, 54, 371, 181);
-		contentPane.add(editorPane);
+		JPanel panel = new JPanel();
+		panel.setBounds(65, 54, 371, 181);
+		contentPane.add(panel);
 		
 		JLabel lblNewLabel1 = new JLabel("");
 		contentPane.add(lblNewLabel1);
@@ -153,9 +150,14 @@ public class PAdministrador extends JFrame {
         ButtonModel selectedButton = btnsAdministrador.getSelection();
 
         if (selectedButton == btnVerHabitaciones.getModel() || selectedButton == btnEliminarHabitacion.getModel() || selectedButton == btnEditarHabitacion.getModel()) {
-        	dispose();
-        	TablaHabitaciones th = new TablaHabitaciones();
-        	th.run();
+        	if(!(HabitacionDLL.mostrarHabitaciones()==null)) {
+        		JOptionPane.showMessageDialog(null, "No hay habitaciones en este momento.");
+        	}else {
+        		dispose();
+            	TablaHabitaciones th = new TablaHabitaciones();
+            	th.run();
+        	}
+        	
         } else if (selectedButton == btnAgregarHabitacion.getModel()) {
 			agregarHabitacion();
         }else {
@@ -223,6 +225,4 @@ public class PAdministrador extends JFrame {
 		
 		return UsuarioDLL.MostrarTodos();
 	}
-
-
 }

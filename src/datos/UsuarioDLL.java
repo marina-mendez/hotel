@@ -12,8 +12,51 @@ public class UsuarioDLL {
 	static Connection CONEXION = CON.conectar();
 	
 	static PreparedStatement STMT;
+	private int id;
+	private String nombre;
+	private String pass;
+	private int rol;
 	
-	
+	public UsuarioDLL(int id, String nombre, String pass, int rol) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.pass = pass;
+		this.rol = rol;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getPass() {
+		return pass;
+	}
+
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
+
+	public int getRol() {
+		return rol;
+	}
+
+	public void setRol(int rol) {
+		this.rol = rol;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public UsuarioDLL(String string, String string2, String string3, int parseInt) {
 		// TODO Auto-generated constructor stub
 	}
@@ -31,8 +74,9 @@ public class UsuarioDLL {
 			STMT.setLong(3, rol);
 			
 			STMT.executeUpdate();
+
 			return true;
-			
+						
 		} catch (Exception e) {
 			System.out.println("Error al guardar: " + e);
 			
@@ -99,7 +143,10 @@ public class UsuarioDLL {
 				datos[1] = resultados.getString(2);
 				datos[2] = resultados.getString(3);
 				datos[3] = resultados.getString(4);
-				listaDeUsuarios.add(new UsuarioDLL(datos[0],datos[1],datos[2],Integer.parseInt(datos[3])));
+				
+				UsuarioDLL u = new UsuarioDLL((Integer.valueOf(datos[0])),datos[1],datos[2],Integer.valueOf(datos[3]));
+				
+				listaDeUsuarios.add(u);
 			}
 			if(listaDeUsuarios.isEmpty()) { 
 				return null; }
@@ -143,7 +190,6 @@ public class UsuarioDLL {
 			if(listaDeUsuarios.isEmpty()) {
 				return null;
 			}else {
-				
 				return listaDeUsuarios;
 			}
 			

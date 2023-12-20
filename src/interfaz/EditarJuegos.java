@@ -124,6 +124,8 @@ public class EditarJuegos extends JFrame {
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
+				PAdministrador pa = new PAdministrador();
+				pa.run();
 			}
 		});
 		

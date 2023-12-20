@@ -208,7 +208,7 @@ public class PRegistro extends JFrame {
 						System.out.println("USUARIO YA EXISTE");
 
 					}else {
-						if(!validarContrasenia(new String(contrasenia.getPassword()), new String(contraseniaDos.getPassword()))) {
+						if(!validarContrasenia(new String(contrasenia.getText()), new String(contraseniaDos.getText()))) {
 							lblErrorUsuario.setVisible(false);
 							lblErrorContraseña.setVisible(true);
 							lblUsuarioYaExiste.setVisible(false);
@@ -219,7 +219,7 @@ public class PRegistro extends JFrame {
 							}while(chequearRol()==false);
 
 							
-							if(UsuarioDLL.guardarUsuario(usuario.getText(), contrasenia.getPassword().toString(), Integer.valueOf(rol))) {
+							if(UsuarioDLL.guardarUsuario(usuario.getText(), contrasenia.getText(), Integer.valueOf(rol))) {
 								JOptionPane.showMessageDialog(null, "Usuario agregado!", "Hotel House Hunter",JOptionPane.DEFAULT_OPTION);
 								dispose();
 								Inicio i = new Inicio();

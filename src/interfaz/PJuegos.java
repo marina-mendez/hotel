@@ -104,7 +104,7 @@ public class PJuegos extends JFrame {
 			}
 		});
         
-        btnEditar.addActionListener(new ActionListener() {
+        btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				PAdministrador i = new PAdministrador();
 				i.run();

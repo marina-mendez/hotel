@@ -193,15 +193,15 @@ public class HabitacionDLL {
 		
 	}
 	
-	public static LinkedList<HabitacionDLL> mostrarHabitacion(String nombre) {
+	public static LinkedList<HabitacionDLL> mostrarHabitacion(String id) {
 		LinkedList<HabitacionDLL> habitaciones = new LinkedList<HabitacionDLL>();
-		String sql = "SELECT * FROM `habitaciones` WHERE id=?";
+		String sql = "SELECT * FROM `habitaciones` WHERE idhabitacion=?";
 		
 		String[] datos = new String[5];
 		try {
 			
 			STMT = CONEXION.prepareStatement(sql);
-			STMT.setString(1, nombre);
+			STMT.setString(1, id);
 			
 			ResultSet resultados =	STMT.executeQuery();
 			System.out.println(resultados);

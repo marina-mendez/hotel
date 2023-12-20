@@ -102,6 +102,7 @@ public class Bienvenida extends JFrame {
 				usuarioUnico = UsuarioDLL.MostrarUsuario(usuario.getText(), new String(contrasenia.getPassword()));
 				
 				
+				
 				if(usuarioUnico == null) {
 					System.out.println("Usuario no encontrado");
 					lblError.setVisible(true);
@@ -132,12 +133,17 @@ public class Bienvenida extends JFrame {
 			}
 		});
 		btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnLogin.setBounds(210, 269, 98, 32);
+		btnLogin.setBounds(140, 269, 98, 32);
 		contentPane.add(btnLogin);
 		
 		contrasenia = new JPasswordField();
 		contrasenia.setBounds(140, 205, 233, 20);
 		contentPane.add(contrasenia);
+		
+		JButton btnSalir = new JButton("Salir");
+		btnSalir.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnSalir.setBounds(276, 269, 98, 32);
+		contentPane.add(btnSalir);
 		
 		
 		JLabel lblNewLabel1 = new JLabel("");
@@ -145,6 +151,12 @@ public class Bienvenida extends JFrame {
 		lblNewLabel1.setIcon(new ImageIcon(new ImageIcon("C:\\Users\\DELL\\Desktop\\Marina\\PA\\hotel\\src\\img\\fondo.jpg").getImage().getScaledInstance(600, 600, Image.SCALE_SMOOTH)));
 		lblNewLabel1.setBounds(0, 0, 514, 334);
 		
-		
+		btnSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				Inicio i = new Inicio();
+				i.run();
+			}
+		});
 	}
 }

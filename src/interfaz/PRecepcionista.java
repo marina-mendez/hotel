@@ -1,18 +1,27 @@
 package interfaz;
 
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ButtonModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+
+import datos.ReservaDLL;
+
+import java.awt.Color;
+import java.awt.SystemColor;
+import javax.swing.JTable;
 
 public class PRecepcionista extends JFrame {
 
@@ -22,10 +31,10 @@ public class PRecepcionista extends JFrame {
 	JRadioButton btnAgregarReserva;
 	JRadioButton btnVerReserva;
 	JRadioButton btnEliminarReserva;
-	JRadioButton btnVerJuegos;
 	JRadioButton btnAgregarReservaJuegos;
 	JRadioButton btnEliminarReservaJuegos;
 	private JButton btnSalir;
+	private JTable table;
 	/**
 	 * Launch the application.
 	 */
@@ -43,7 +52,7 @@ public class PRecepcionista extends JFrame {
 	 */
 	public PRecepcionista() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 512, 302);
+		setBounds(100, 100, 581, 365);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -52,65 +61,62 @@ public class PRecepcionista extends JFrame {
 		
 
 		JLabel lblAdmin = new JLabel("House Hunter: Portal del Recepcionista");
-		lblAdmin.setFont(new Font("Corbel", Font.PLAIN, 17));
+		lblAdmin.setBounds(114, 42, 362, 21);
+		lblAdmin.setBackground(Color.WHITE);
+		lblAdmin.setForeground(Color.DARK_GRAY);
+		lblAdmin.setFont(new Font("Ink Free", Font.BOLD, 20));
 		lblAdmin.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAdmin.setBounds(123, 21, 269, 21);
 		contentPane.add(lblAdmin);
 
 		btnAgregarReserva = new JRadioButton("Agregar una reserva");
+		btnAgregarReserva.setBounds(92, 133, 156, 25);
 		btnAgregarReserva.setFont(new Font("Corbel", Font.PLAIN, 13));
-		btnAgregarReserva.setBounds(46, 119, 156, 25);
 		contentPane.add(btnAgregarReserva);
 		
 		btnVerReserva = new JRadioButton("Ver reservas");
+		btnVerReserva.setBounds(92, 100, 115, 25);
 		btnVerReserva.setFont(new Font("Corbel", Font.PLAIN, 13));
-		btnVerReserva.setBounds(46, 86, 115, 25);
 		contentPane.add(btnVerReserva);
 		
 		btnEliminarReserva = new JRadioButton("Eliminar una reserva");
+		btnEliminarReserva.setBounds(92, 168, 156, 25);
 		btnEliminarReserva.setFont(new Font("Corbel", Font.PLAIN, 13));
-		btnEliminarReserva.setBounds(46, 154, 156, 25);
 		contentPane.add(btnEliminarReserva);
 		
-		btnVerJuegos = new JRadioButton("Ver juegos");
-		btnVerJuegos.setFont(new Font("Corbel", Font.PLAIN, 13));
-		btnVerJuegos.setBounds(349, 86, 81, 25);
-		contentPane.add(btnVerJuegos);
-		
 		btnAgregarReservaJuegos = new JRadioButton("Reservar un juego");
+		btnAgregarReservaJuegos.setBounds(356, 114, 121, 25);
 		btnAgregarReservaJuegos.setFont(new Font("Corbel", Font.PLAIN, 13));
-		btnAgregarReservaJuegos.setBounds(309, 119, 121, 25);
 		contentPane.add(btnAgregarReservaJuegos);
 	
 		btnEliminarReservaJuegos = new JRadioButton("Eliminar reserva de un juego");
+		btnEliminarReservaJuegos.setBounds(305, 157, 175, 25);
 		btnEliminarReservaJuegos.setFont(new Font("Corbel", Font.PLAIN, 13));
-		btnEliminarReservaJuegos.setBounds(259, 154, 175, 25);
 		contentPane.add(btnEliminarReservaJuegos);
 		
 		btnsRecepcion = new ButtonGroup();
 		btnsRecepcion.add(btnAgregarReserva);
 		btnsRecepcion.add(btnVerReserva);
 		btnsRecepcion.add(btnEliminarReserva);
-		btnsRecepcion.add(btnVerJuegos);
 		btnsRecepcion.add(btnAgregarReservaJuegos);
 		btnsRecepcion.add(btnEliminarReservaJuegos);
 		
 		btnSalir = new JButton("Salir");
+		btnSalir.setBounds(354, 215, 84, 36);
 		btnSalir.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnSalir.setBounds(308, 201, 84, 36);
 		contentPane.add(btnSalir);
+
 
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				dispose();
 				Bienvenida b = new Bienvenida();
 				b.run();
 			}
 		});
 		
 		JButton btnAceptarAdministracion = new JButton("Aceptar");
+		btnAceptarAdministracion.setBounds(155, 215, 93, 36);
 		btnAceptarAdministracion.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnAceptarAdministracion.setBounds(109, 201, 93, 36);
 		contentPane.add(btnAceptarAdministracion);
 				
 		btnAceptarAdministracion.addActionListener(new ActionListener() {
@@ -121,29 +127,48 @@ public class PRecepcionista extends JFrame {
         });
 		
 		JLabel lblElijaUnaOpcin = new JLabel("Elija una opción:");
+		lblElijaUnaOpcin.setBounds(244, 74, 100, 19);
 		lblElijaUnaOpcin.setHorizontalAlignment(SwingConstants.CENTER);
 		lblElijaUnaOpcin.setFont(new Font("Corbel", Font.PLAIN, 15));
-		lblElijaUnaOpcin.setBounds(198, 60, 100, 19);
 		contentPane.add(lblElijaUnaOpcin);
+		
+		table = new JTable();
+		table.setBackground(SystemColor.control);
+		table.setBounds(59, 29, 447, 251);
+		contentPane.add(table);
+		
+		JLabel lblNewLabel1 = new JLabel("");
+		lblNewLabel1.setBounds(-49, 0, 628, 434);
+		contentPane.add(lblNewLabel1);
+		lblNewLabel1.setIcon(new ImageIcon(new ImageIcon("C:\\Users\\DELL\\Desktop\\Marina\\PA\\hotel\\src\\img\\fondo-rece.jpg").getImage().getScaledInstance(1200, 700, Image.SCALE_SMOOTH)));
 
 	}
 	private void handleRadioButtonSelection() {
         ButtonModel selectedButton = btnsRecepcion.getSelection();
       
         if (selectedButton == btnVerReserva.getModel()) {
-        	EliminarReserva er = new EliminarReserva();
-        	er.run();        } else if (selectedButton == btnAgregarReserva.getModel()) {
+        	if(ReservaDLL.mostrarReservas()==null) {
+        		JOptionPane.showMessageDialog(null, "No hay reservas en este momento");
+        	}else {
+            	EliminarReserva er = new EliminarReserva();
+            	er.run();        
+        	}
+        } else if (selectedButton == btnAgregarReserva.getModel()) {
         	AgregarCliente ac = new AgregarCliente();
         	ac.run();
         }else if (selectedButton == btnEliminarReserva.getModel()) {
-        	EliminarReserva er = new EliminarReserva();
-        	er.run();
-        }else if (selectedButton == btnVerJuegos.getModel()) {
-            System.out.println("btnAgregarJuegos");
+        	if(ReservaDLL.mostrarReservas()==null) {
+        		JOptionPane.showMessageDialog(null, "No hay reservas en este momento");
+        	}else {
+            	EliminarReserva er = new EliminarReserva();
+            	er.run();        
+        	}
         }else if (selectedButton == btnAgregarReservaJuegos.getModel()) {
-            System.out.println("btnAgregarJuegos");
+            ReservaJuegos rj = new ReservaJuegos();
+            rj.run();
         }else {
-            System.out.println("btnEliminarJuegos");
+            EliminarReservaJuego erj = new EliminarReservaJuego();
+            erj.run();
 
         }
     }

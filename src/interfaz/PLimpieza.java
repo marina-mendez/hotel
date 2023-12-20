@@ -11,9 +11,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.JTable;
 import javax.swing.ButtonGroup;
 import javax.swing.ButtonModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -54,9 +57,9 @@ public class PLimpieza extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("House Hunter: Personal de Limpieza");
-		lblNewLabel.setFont(new Font("Corbel", Font.PLAIN, 16));
+		lblNewLabel.setFont(new Font("Ink Free", Font.BOLD, 20));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(57, 11, 321, 26);
+		lblNewLabel.setBounds(45, 11, 344, 26);
 		contentPane.add(lblNewLabel);
 		
 		table = new JTable();
@@ -116,6 +119,11 @@ public class PLimpieza extends JFrame {
 		contentPane.add(btnAceptar);
 		btnAceptar.setVisible(false);
 		
+		JLabel lblNewLabel1 = new JLabel("");
+		contentPane.add(lblNewLabel1);
+		lblNewLabel1.setIcon(new ImageIcon(new ImageIcon("C:\\Users\\DELL\\Desktop\\Marina\\PA\\hotel\\src\\img\\fondo-limpieza.jpg").getImage().getScaledInstance(1200, 700, Image.SCALE_SMOOTH)));
+		lblNewLabel1.setBounds(-23, 0, 477, 303);
+		
 		btnCambiarEstado.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
@@ -136,6 +144,19 @@ public class PLimpieza extends JFrame {
 
 						if(limpieza) {
 							JOptionPane.showMessageDialog(null, "Estado actualizado.");
+							tabla.setRowCount(1);
+							for (HabitacionDLL habitacion : HabitacionDLL.mostrarHabitaciones()) {
+								String limpio;
+								if(habitacion.getLimpieza().equalsIgnoreCase("1")) {
+									limpio= "Limpio";
+								}else {
+									limpio= "Sucio";
+								}
+								tabla.addRow(new Object[] {habitacion.getId(), habitacion.getPiso(), limpio});
+							}
+							
+							table.revalidate();
+							table.repaint();
 						}else {
 							JOptionPane.showMessageDialog(null, "No se pudo actualizar el estado.");
 						}

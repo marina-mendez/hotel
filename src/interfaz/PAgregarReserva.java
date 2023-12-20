@@ -1,18 +1,18 @@
 package interfaz;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
@@ -21,7 +21,10 @@ import javax.swing.table.DefaultTableModel;
 
 import com.toedter.calendar.JDateChooser;
 
+import datos.ClienteDLL;
 import datos.HabitacionDLL;
+import datos.ReservaDLL;
+import negocio.Cliente;
 
 public class PAgregarReserva extends JFrame {
 
@@ -29,14 +32,13 @@ public class PAgregarReserva extends JFrame {
 	private JPanel contentPane;
     private JTable table;
     private JTable table_1;
-    private int ocupantes;
 
 	/**
 	 * Launch the application.
 	 */
 			public void run() {
 				try {
-					PAgregarReserva frame = new PAgregarReserva(ocupantes);
+					PAgregarReserva frame = new PAgregarReserva();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -46,23 +48,21 @@ public class PAgregarReserva extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public PAgregarReserva(int ocupantes) {
+	public PAgregarReserva() {
+		
+		System.out.println("OCUPANTES" + AgregarCliente.OC);
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 535, 429);
+        setBounds(100, 100, 535, 411);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
         setContentPane(contentPane);
         contentPane.setLayout(null);
-
-        // Utilizando JDateChooser en lugar de JDatePicker
-        JDateChooser fechaInicio = new JDateChooser();
-        fechaInicio.setBounds(125, 234, 269, 29);
-        contentPane.add(fechaInicio);
         
         JLabel lblAdmin = new JLabel("House Hunter: Portal del Recepcionista");
         lblAdmin.setBounds(64, 32, 385, 21);
-        lblAdmin.setForeground(Color.WHITE);
+        lblAdmin.setForeground(Color.BLACK);
         lblAdmin.setFont(new Font("Ink Free", Font.BOLD, 20));
         lblAdmin.setHorizontalAlignment(SwingConstants.CENTER);
         contentPane.add(lblAdmin);
@@ -80,7 +80,7 @@ public class PAgregarReserva extends JFrame {
         table.setModel(tabla);
 
         JButton btnReservar = new JButton("Reservar");
-        btnReservar.setBounds(215, 356, 89, 23);
+        btnReservar.setBounds(215, 338, 89, 23);
         contentPane.add(btnReservar);
 
         JLabel lblElegirHabitacin = new JLabel("Elegir habitación:");
@@ -91,28 +91,28 @@ public class PAgregarReserva extends JFrame {
         contentPane.add(lblElegirHabitacin);
         
         JDateChooser fechaSalida = new JDateChooser();
-        fechaSalida.setBounds(125, 299, 269, 29);
+        fechaSalida.setBounds(125, 245, 269, 29);
         contentPane.add(fechaSalida);
         
-        JLabel lblNewLabel = new JLabel("Fecha de ingreso");
-        lblNewLabel.setBounds(125, 209, 269, 14);
-        contentPane.add(lblNewLabel);
-        
         JLabel lblFechaDeSalida = new JLabel("Fecha de salida");
-        lblFechaDeSalida.setBounds(125, 274, 269, 14);
+        lblFechaDeSalida.setBounds(125, 220, 269, 14);
         contentPane.add(lblFechaDeSalida);
 		
 		table_1 = new JTable();
-		table_1.setBounds(104, 200, 311, 145);
+		table_1.setBounds(104, 205, 311, 112);
 		contentPane.add(table_1);
 		
 		tabla.addRow(new Object[]{"Habitacion", "Ocupantes", "Restantes", "Piso"});
         for (HabitacionDLL habitacion : HabitacionDLL.mostrarHabitaciones()) {
-		     if (ocupantes >= Integer.valueOf(habitacion.getRestantes()) && habitacion.getLimpieza().equalsIgnoreCase("1")) {
+		     if ((AgregarCliente.OC <= Integer.valueOf(habitacion.getRestantes())) && (habitacion.getLimpieza().equalsIgnoreCase("1"))) {
 		         tabla.addRow(new Object[]{habitacion.getId(), habitacion.getOcupantes(), habitacion.getRestantes(), habitacion.getPiso(), habitacion.getLimpieza()});
 		     }
 		 }
-
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(64, 23, 385, 35);
+		contentPane.add(panel);
+		
 		JLabel lblNewLabel1 = new JLabel("");
 		lblNewLabel1.setBounds(0, 0, 724, 442);
 		contentPane.add(lblNewLabel1);
@@ -121,21 +121,62 @@ public class PAgregarReserva extends JFrame {
         btnReservar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int fila = table.getSelectedRow();
-                int id = Integer.valueOf((String) table.getValueAt(fila, 0));
+                int idHabitacion = Integer.valueOf((String) table.getValueAt(fila, 0));
 
                 Date fechaI = fechaSalida.getDate();
                 Date fechaS = fechaSalida.getDate();
 
                 System.out.println("FECHA INGRESO: " + fechaI);
                 System.out.println("FECHA SALIDA: " + fechaS);
+                
+                SimpleDateFormat formatoFinal = new SimpleDateFormat("yyyy-MM-dd 15:00:00");
+                String fechaSalidaString = formatoFinal.format(fechaS);
+                
+		        LocalDate currentDate = LocalDate.now();
+		        String hora = "11:00:00";
+		        String fechaIngresoString = currentDate + " " + hora;
+		        
+		        System.out.println("FECHA INGRESO: " + fechaIngresoString);
+		        System.out.println("FECHA SALIDA: " + fechaSalidaString);
+		        
+		        Cliente c = ClienteDLL.traerUltimoCliente();
+		        
+		        boolean reserva = ReservaDLL.realizarReserva(c.getId(), idHabitacion, fechaIngresoString, fechaSalidaString, AgregarCliente.OC);
+				
+				if(reserva) {
+					JOptionPane.showMessageDialog(null, "Reserva realizada!");
+					actualizarOcupacion(idHabitacion);
+					dispose();
+					PRecepcionista pr = new PRecepcionista();
+					pr.run();
+				}else {
+					JOptionPane.showMessageDialog(null, "No se pudo realizar la reserva.");
+					dispose();
+					PRecepcionista pr = new PRecepcionista();
+					pr.run();
+				}
 
-                // Formatea la fecha en un formato específico
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-                //String fechaFormateada = dateFormat.format(fechaSeleccionada);
                 
             }
         });
         
 	}
-
+	
+	private void actualizarOcupacion(int idHabitacion) {
+		// Restamos el número de ocupantes libres
+		
+        for (HabitacionDLL habitacion : HabitacionDLL.mostrarHabitaciones()) {
+		     if (habitacion.getId().equalsIgnoreCase(String.valueOf(idHabitacion))) {
+		 		int numero = Integer.valueOf(habitacion.getRestantes()) - AgregarCliente.OC;
+		 		if(HabitacionDLL.actualizarOcupacion(idHabitacion, numero)) {
+				}else {
+					System.out.println("No se pudo actualizar la ocupación de la habitación.");
+				}
+		     }
+		     
+		 }
+		
+	}
 }
+
+

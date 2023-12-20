@@ -196,8 +196,8 @@ public class AgregarHabitacion extends JFrame {
 			public void actionPerformed(ActionEvent e) {
                 dispose();
 
-				Bienvenida b = new Bienvenida();
-				b.run();
+				PAdministrador pa = new PAdministrador();
+				pa.run();
 			}
 		});
 		
