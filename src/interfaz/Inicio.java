@@ -37,10 +37,10 @@ public class Inicio extends JFrame {
 	 */
 	public Inicio() {
 		
-		String filePath="jazz.wav";
+		/*String filePath="jazz.wav";
 		Thread musica = new Thread(new MusicPlayer(filePath));
 		musica.start();
-		
+		*/
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

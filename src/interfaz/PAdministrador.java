@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import datos.HabitacionDLL;
+import datos.ReservaDLL;
 import datos.UsuarioDLL;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -150,12 +151,11 @@ public class PAdministrador extends JFrame {
         ButtonModel selectedButton = btnsAdministrador.getSelection();
 
         if (selectedButton == btnVerHabitaciones.getModel() || selectedButton == btnEliminarHabitacion.getModel() || selectedButton == btnEditarHabitacion.getModel()) {
-        	if(!(HabitacionDLL.mostrarHabitaciones()==null)) {
-        		JOptionPane.showMessageDialog(null, "No hay habitaciones en este momento.");
+        	if(HabitacionDLL.mostrarHabitaciones()==null) {
+        		JOptionPane.showMessageDialog(null, "No hay habitaciones en este momento");
         	}else {
-        		dispose();
-            	TablaHabitaciones th = new TablaHabitaciones();
-            	th.run();
+            	TablaHabitaciones er = new TablaHabitaciones();
+            	er.run();        
         	}
         	
         } else if (selectedButton == btnAgregarHabitacion.getModel()) {

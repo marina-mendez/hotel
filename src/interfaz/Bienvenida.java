@@ -4,9 +4,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import datos.HabitacionDLL;
 import datos.UsuarioDLL;
 import javax.swing.JEditorPane;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.Image;
 
@@ -125,8 +128,14 @@ public class Bienvenida extends JFrame {
 						break;
 					default:
 						//Módulo Limpieza
-						PLimpieza pl = new PLimpieza();
-						pl.run();
+						if(!(HabitacionDLL.mostrarHabitaciones()==null)) {
+			        		dispose();
+								PLimpieza pl = new PLimpieza();
+								pl.run();
+								break;
+			        	}else {
+			        		JOptionPane.showMessageDialog(null, "No hay habitaciones en este momento.");
+			        	}
 						break;
 					}
 				}
